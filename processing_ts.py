@@ -1,4 +1,5 @@
 import pandas as pd
+import re
 
 
 def process_datetime(dataframe_ts):
