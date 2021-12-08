@@ -32,5 +32,5 @@ def process_activities(dataframe_ts):
 
 
 def get_unique_activities(data_activities):
-    unique_actitivities = [activity[0] for activity in data_activities]
-    return unique_actitivities
+    unique_activities = [activity[0] for activity in data_activities]
+    return unique_activities
