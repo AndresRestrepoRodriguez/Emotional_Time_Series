@@ -35,3 +35,20 @@ def process_activities(dataframe_ts):
 def get_unique_activities(data_activities):
     unique_activities = [activity[0] for activity in data_activities]
     return unique_activities
+
+
+def get_time_diff_activities(activities_info):
+    time_data_activities = []
+    initial_time = activities_info[0][1]
+    final_time = activities_info[-1][-1]
+    general_time = (final_time - initial_time).total_seconds()
+    time_data_activities.append(["", "general", general_time])
+    count_activity = 1
+    for activity in activities_info:
+        activity_name = activity[0]
+        initial_time_activity = activity[1]
+        final_time_activity = activity[-1]
+        diff_time_activity = (final_time_activity - initial_time_activity).total_seconds()
+        time_data_activities.append([count_activity, activity_name, diff_time_activity])
+        count_activity += 1
+    return time_data_activities
