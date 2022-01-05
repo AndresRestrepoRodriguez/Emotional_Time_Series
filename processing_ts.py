@@ -38,17 +38,18 @@ def get_unique_activities(data_activities):
 
 
 def get_time_diff_activities(activities_info):
+    count_activity = 0
     time_data_activities = []
     initial_time = activities_info[0][1]
     final_time = activities_info[-1][-1]
     general_time = (final_time - initial_time).total_seconds()
-    time_data_activities.append(["", "general", general_time])
-    count_activity = 1
+    time_data_activities.append([count_activity, "general", general_time])
     for activity in activities_info:
+        count_activity += 1
         activity_name = activity[0]
         initial_time_activity = activity[1]
         final_time_activity = activity[-1]
         diff_time_activity = (final_time_activity - initial_time_activity).total_seconds()
         time_data_activities.append([count_activity, activity_name, diff_time_activity])
-        count_activity += 1
+
     return time_data_activities
