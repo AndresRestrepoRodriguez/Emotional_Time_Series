@@ -66,11 +66,13 @@ def generate_results_time(time_activities, dataframe_results):
         if not filter_df.empty:
             total_questions = filter_df['total_questions'].values[0]
             correct = filter_df['correct'].values[0]
+            incorrect = filter_df['incorrect'].values[0]
             errors = filter_df['errors'].values[0]
             dict_results_time[name_activity] = {'time': diff_time,
                                                 'results': {
                                                     'total_questions': total_questions,
                                                     'correct': correct,
+                                                    'incorrect': incorrect,
                                                     'errors': errors
                                                 }}
         else:
