@@ -1,12 +1,9 @@
-import processing_ts, plotting_tool
+from emotional_time_series import processing_ts
 import pandas as pd
-import matplotlib.pyplot as plt
-import matplotlib
 import seaborn as sns
 sns.set()
 sns.set_style("whitegrid")
 #%matplotlib inline
-import datetime
 
 metrics = ["engagement", "excitation", "stress", "relax", "interest", "focus"]
 
@@ -27,7 +24,7 @@ dict_colores = {"VL-DNA": "#E8846E",
                 "OP-ORD": "#FD95DE",
                 "OP-DLG": "#FBA64C"}
 
-path_data = "data_1secs_extra_exe.csv"
+path_data = "../data_1secs_extra_exe.csv"
 data = pd.read_csv(path_data)
 
 data_ts = processing_ts.process_datetime(data)

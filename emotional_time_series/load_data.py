@@ -6,7 +6,7 @@ import os
 ID_PREFIX = "id"
 LESSON_PREFIX = "lesson"
 UNDERSCORE_VALUE = "_"
-DATA_METRICS_FILE_NAME = "data_1secs_extra_exe.csv"
+DATA_METRICS_FILE_NAME = "../data_1secs_extra_exe.csv"
 
 
 def load_participant_lesson_dataframe(root_path, id_participant, id_lesson):
