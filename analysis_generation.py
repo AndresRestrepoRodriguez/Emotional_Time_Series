@@ -1,7 +1,5 @@
-import plotting_tool
-import graphics_processing
-import load_data
-import processing_ts
+from graphing import graphics_processing, plotting_tool
+from time_series import processing_ts, load_data
 
 metrics = ["engagement", "excitation", "stress", "relax", "interest", "focus"]
 colors_metrics = {"engagement": "#BF2F21",
