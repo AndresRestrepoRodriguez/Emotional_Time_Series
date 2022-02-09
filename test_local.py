@@ -1,4 +1,4 @@
-from emotional_time_series import processing_ts
+import processing_ts
 import pandas as pd
 import seaborn as sns
 sns.set()
@@ -24,7 +24,7 @@ dict_colores = {"VL-DNA": "#E8846E",
                 "OP-ORD": "#FD95DE",
                 "OP-DLG": "#FBA64C"}
 
-path_data = "../data_1secs_extra_exe.csv"
+path_data = "data_1secs_extra_exe.csv"
 data = pd.read_csv(path_data)
 
 data_ts = processing_ts.process_datetime(data)

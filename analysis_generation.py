@@ -1,4 +1,7 @@
-from emotional_time_series import processing_ts, load_data, graphics_processing, plotting_tool
+import plotting_tool
+import graphics_processing
+import load_data
+import processing_ts
 
 metrics = ["engagement", "excitation", "stress", "relax", "interest", "focus"]
 colors_metrics = {"engagement": "#BF2F21",
