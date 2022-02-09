@@ -1,11 +1,13 @@
 import pandas as pd
-import re
+
+TIME_VALUE_STRING = 'time_value'
+DATE_FORMAT_TS = '%Y-%m-%d %H:%M:%S.%f'
 
 
 def process_datetime(dataframe_ts):
     dataframe_ts_processed = dataframe_ts.copy()
-    dataframe_ts_processed["time_value"] = pd.to_datetime(dataframe_ts['time_value'], format='%Y-%m-%d %H:%M:%S.%f')
-    dataframe_ts_processed.set_index(pd.DatetimeIndex(dataframe_ts_processed['time_value']), inplace=True)
+    dataframe_ts_processed[TIME_VALUE_STRING] = pd.to_datetime(dataframe_ts[TIME_VALUE_STRING], format=DATE_FORMAT_TS)
+    dataframe_ts_processed.set_index(pd.DatetimeIndex(dataframe_ts_processed[TIME_VALUE_STRING]), inplace=True)
     return dataframe_ts_processed
 
 
@@ -15,7 +17,7 @@ def process_activities(dataframe_ts):
     previous_data = "-".join(data_values[0][10:])
     previous_datetime = data_values[0][2]
     i = 1
-    while (True):
+    while True:
         if previous_data == "-".join(data_values[i][10:]):
             i += 1
         else:
@@ -78,3 +80,6 @@ def generate_results_time(time_activities, dataframe_results):
         else:
             dict_results_time[name_activity] = {'time': diff_time}
     return dict_results_time
+
+
+
