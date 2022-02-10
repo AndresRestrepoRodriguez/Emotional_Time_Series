@@ -1,4 +1,4 @@
-from src.time_series import processing_ts
+from time_series import processing_ts
 import pandas as pd
 import seaborn as sns
 sns.set()
