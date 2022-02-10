@@ -5,6 +5,7 @@ import re
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import numpy as np
+import datetime
 
 sns.set()
 sns.set_style("whitegrid")
@@ -71,7 +72,9 @@ def generate_time_series_plot(activities_info, dataframe_ts, metrics, colors_met
         legend_title="Metrics")
     fig.update_xaxes(
         tickformat="%H:%M:%S",
-        tickangle=-45)
+        tickangle=-45,
+        range=[dataframe_ts.index[0] - datetime.timedelta(seconds=5),
+               dataframe_ts.index[-1] + datetime.timedelta(seconds=5)])
     return fig
 
 
