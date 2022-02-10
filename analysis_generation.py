@@ -31,7 +31,7 @@ def generate_analysis_participant_lesson(root_path_data, id_participant, id_less
     activities_participant_lesson = processing_ts.process_activities(data_ts_processed_participant_lesson)
     data_time_activity = graphics_processing.generate_data_time_activity(participant_lesson_time_result)
     data_result_lesson_activity = graphics_processing.generate_data_result_activity(participant_lesson_time_result)
-    data_time_bar_pie_time_row = graphics_processing.generate_data_time_activity_bar(data_time_activity)
+    data_time_bar_pie_time_row = graphics_processing.generate_data_time_activity_bar(participant_lesson_time_result)
     data_pie_results_row = graphics_processing.generate_data_result_general(data_result_lesson_activity)
     data_bar_results_row = graphics_processing.generate_data_results_activity_bar_grouped(data_result_lesson_activity)
 
