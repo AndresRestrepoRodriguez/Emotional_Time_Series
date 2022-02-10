@@ -99,7 +99,7 @@ def generate_pie_activity_time(data_time_activity, legend_show=True):
 def generate_bar_grouped_activity_results(data_results_activities, legend_show=True):
     data_traces = []
     count = 0
-    colors = ['red', 'green', 'blue', 'yellow']
+    colors = ['#EF553B', '#00CC96', '#636EFA', '#FFA15A']
     for value_name in data_results_activities['name_values']:
         trace = go.Bar(x=data_results_activities['x_values'],
                        y=data_results_activities['y_values'][count], marker_color=colors[count],
@@ -110,7 +110,7 @@ def generate_bar_grouped_activity_results(data_results_activities, legend_show=T
 
 
 def generate_pie_activity_result(data_result_activity, legend_show=True):
-    colors = ['red', 'green', 'blue', 'yellow']
+    colors = ['#EF553B', '#00CC96', '#636EFA', '#FFA15A']
     return go.Pie(values=data_result_activity["y_values"], labels=data_result_activity["x_values"],
                   showlegend=legend_show, marker=dict(colors=colors))
 
@@ -193,7 +193,7 @@ def generate_row_results(data_time_activity, data_time_bar_pie, data_result_bar)
     #data_result_bar = generate_data_results_activity_bar_grouped(data_time_activity)
     rows = 1
     columns = 3
-    subplot_titles = ("Time by Activity", "Time by Activity Bar plot", "Time Porcentage by Activity")
+    subplot_titles = ("Results by Activity", "Results by Activity Bar plot", "General Results Porcentage by Activity")
     header_table = ["Activity", "Total Questions", "Correct", "Errors / Attempts", "Incorrect"]
     specs = [[{'type': 'domain'}, {'type': 'bar'}, {'type': 'pie'}]]
     fig = make_subplots(rows=rows, cols=columns, specs=specs,
