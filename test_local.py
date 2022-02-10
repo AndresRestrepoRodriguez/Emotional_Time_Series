@@ -1,5 +1,3 @@
-from src.timeseries import processing_ts
-import pandas as pd
 import seaborn as sns
 sns.set()
 sns.set_style("whitegrid")
@@ -32,7 +30,5 @@ dict_colores = {"VL-DNA": "#E8846E",
 #unique_act = processing_ts.get_unique_activities(activities)
 #diff_time_activities = processing_ts.get_time_diff_activities(activities)
 #print(diff_time_activities)
-
-from src import analysis_generation
 
 
