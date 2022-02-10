@@ -211,6 +211,8 @@ def generate_row_results(data_time_activity, data_time_bar_pie, data_result_bar)
         fig.append_trace(bar_plot, 1, 2)
 
     fig.add_trace(generate_pie_activity_result(data_time_bar_pie), 1, 3)
+    fig['layout']['xaxis']['title'] = 'Activity'
+    fig['layout']['yaxis']['title'] = 'Answers'
     layout = go.Layout(barmode='group', )
     fig = go.Figure(fig, layout=layout)
     fig.update_layout(
