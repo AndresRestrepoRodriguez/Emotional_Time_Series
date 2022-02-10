@@ -24,13 +24,15 @@ dict_colores = {"VL-DNA": "#E8846E",
                 "OP-ORD": "#FD95DE",
                 "OP-DLG": "#FBA64C"}
 
-path_data = "data_1secs_extra_exe.csv"
-data = pd.read_csv(path_data)
+#path_data = "data_1secs_extra_exe.csv"
+#data = pd.read_csv(path_data)
 
-data_ts = processing_ts.process_datetime(data)
-activities = processing_ts.process_activities(data_ts)
-unique_act = processing_ts.get_unique_activities(activities)
-diff_time_activities = processing_ts.get_time_diff_activities(activities)
-print(diff_time_activities)
+#data_ts = processing_ts.process_datetime(data)
+#activities = processing_ts.process_activities(data_ts)
+#unique_act = processing_ts.get_unique_activities(activities)
+#diff_time_activities = processing_ts.get_time_diff_activities(activities)
+#print(diff_time_activities)
+
+from src import analysis_generation
 
 
