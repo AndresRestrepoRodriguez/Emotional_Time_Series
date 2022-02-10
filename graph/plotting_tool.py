@@ -68,11 +68,6 @@ def generate_time_series_plot(activities_info, dataframe_ts, metrics, colors_met
         title_x=0.5,
         xaxis_title="Time",
         yaxis_title="Performance Metrics Value",
-        font=dict(
-            family="Arial",
-            size=15,
-            color='#000000'
-        ),
         legend_title="Metrics")
     fig.update_xaxes(
         tickformat="%H:%M:%S",
@@ -187,7 +182,7 @@ def generate_row_time(data_time_activity, data_time_bar_pie):
                    'color': '#000000'
                }},
         title_x=0.5,
-        legend_title="Metrics",
+        legend_title="Activities",
     )
     return fig
 
@@ -216,14 +211,13 @@ def generate_row_results(data_time_activity, data_time_bar_pie, data_result_bar)
     layout = go.Layout(barmode='group', )
     fig = go.Figure(fig, layout=layout)
     fig.update_layout(
-        title={'text': ' <b> Time Measurement <br> <b>',
+        title={'text': ' <b> Results <br> <b>',
                'font': {
                    'family': "Arial",
                    'size': 20,
                    'color': '#000000'
                }},
         title_x=0.5,
-        legend_title="Metrics",
     )
     return fig
 
