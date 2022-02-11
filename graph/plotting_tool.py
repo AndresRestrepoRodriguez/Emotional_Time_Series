@@ -197,7 +197,7 @@ def generate_row_results(data_time_activity, data_time_bar_pie, data_result_bar)
     rows = 1
     columns = 3
     subplot_titles = ("Results by Activity", "Results by Activity Bar plot", "General Results Porcentage by Activity")
-    header_table = ["Activity", "Total Questions", "Correct", "Errors / Attempts", "Incorrect"]
+    header_table = ["Activity", "Total Questions", "Correct", "Incorrect", "Errors / Attempts"]
     specs = [[{'type': 'domain'}, {'type': 'bar'}, {'type': 'pie'}]]
     fig = make_subplots(rows=rows, cols=columns, specs=specs,
                         subplot_titles=subplot_titles)
