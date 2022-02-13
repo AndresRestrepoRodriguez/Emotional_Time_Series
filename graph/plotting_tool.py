@@ -268,7 +268,7 @@ def generate_time_series_participant_metric(dataframes_ts_lessons, metric, color
     return traces
 
 
-def generate_time_series_partipant_metrics(dataframes_ts_lessons, metrics, df_time_series_long_xaxis):
+def generate_time_series_partipant_metrics(dataframes_ts_lessons, metrics, df_time_series_long_xaxis, colors_lessons):
     # df_time_series_long_xaxis = dataframes_ts_lessons[get_most_long_time_series(df_consolidate)]
 
     subtitles_array = []

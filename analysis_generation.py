@@ -87,7 +87,9 @@ def generate_analysis_participant_lessons(root_path_data, id_participant, ids_le
     most_long_time_serie = processing_ts.get_most_long_time_series(processed_participant_lessons_data_ts)
 
     time_series_group_row = plotting_tool.generate_time_series_partipant_metrics(processed_participant_lessons_data_ts,
-                                                                                 metrics, most_long_time_serie)
+                                                                                 metrics,
+                                                                                 most_long_time_serie,
+                                                                                 colors_lessons)
 
     histograms_unified_row = plotting_tool.generate_row_histogram_metrics_lessons_unified(
         consolidate_metrics_lessons_unified,
