@@ -73,7 +73,6 @@ def get_general_results_lessons(data_json_consolidate):
     key_results = 'results'
     for key_lesson in data_json_consolidate.keys():
         filter_data = data_json_consolidate[key_lesson]['0-general']
-        print(filter_data)
         results = list(filter_data[key_results].values())
         temp_data = [key_lesson] + results
         array_data.append(temp_data)
@@ -86,7 +85,6 @@ def generate_data_results_general_lesson_pie(data_general_results_lessons):
     x_values = ["Correct", "Incorrect", "Errors / Attempts"]
     for lesson in data_general_results_lessons:
         y_values_tmp.append(lesson[2:])
-    print(y_values_tmp)
     dict_values['x_values'] = x_values
     dict_values['y_values'] = np.sum(y_values_tmp, axis=0)
     return dict_values
