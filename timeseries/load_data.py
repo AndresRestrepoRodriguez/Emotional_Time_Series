@@ -2,7 +2,6 @@ import pandas as pd
 import json
 import os
 
-
 ID_PREFIX = "id"
 LESSON_PREFIX = "lesson"
 UNDERSCORE_VALUE = "_"
@@ -28,3 +27,20 @@ def load_participant_lesson_time_results(root_path, id_participant, id_lesson):
     return json_data_participant_lesson
 
 
+def load_participant_lessons_consolidate(root_path, id_participant, id_lessons):
+    lesson_str = "lesson_"
+    dict_lessons = {}
+    for lesson in id_lessons:
+        data_tmp = load_participant_lesson_dataframe(root_path, id_participant, lesson)
+        # data_tmp_processed = process_datetime(data_tmp)
+        dict_lessons[lesson_str + lesson] = data_tmp
+    return dict_lessons
+
+
+def load_results_participant_lessons_consolidate(root_path, id_participant, id_lessons):
+    lesson_str = "lesson_"
+    dict_lessons_results = {}
+    for lesson in id_lessons:
+        data_tmp = load_participant_lesson_time_results(root_path, id_participant, lesson)
+        dict_lessons_results[lesson_str + lesson] = data_tmp
+    return dict_lessons_results

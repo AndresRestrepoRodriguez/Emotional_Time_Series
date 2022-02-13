@@ -11,6 +11,12 @@ def process_datetime(dataframe_ts):
     return dataframe_ts_processed
 
 
+def process_datetime_lessons(consolidate_dataframe_ts):
+    for key_lesson in consolidate_dataframe_ts:
+        consolidate_dataframe_ts[key_lesson] = process_datetime(consolidate_dataframe_ts[key_lesson])
+    return consolidate_dataframe_ts
+
+
 def process_activities(dataframe_ts):
     data_values = dataframe_ts.values
     zone_data = []
@@ -82,4 +88,9 @@ def generate_results_time(time_activities, dataframe_results):
     return dict_results_time
 
 
-
+def get_most_long_time_series(dataframes_ts_lessons):
+    sizes_time_series = {}
+    for key_lesson in dataframes_ts_lessons:
+        data_ts_len = len(dataframes_ts_lessons[key_lesson])
+        sizes_time_series[key_lesson] = data_ts_len
+    return max(sizes_time_series, key=sizes_time_series.get)
