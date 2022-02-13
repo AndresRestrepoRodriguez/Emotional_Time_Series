@@ -455,7 +455,7 @@ def generate_hist_by_metric_lessons(dataframe_ts, metric, colors_lessons, lesson
                         name=lesson, legendgroup=lesson, showlegend=showlegend)
 
 
-def generate_row_histogram_metrics_lessons_overlay(df_consolidate_time_series, colors_metrics, metrics):
+def generate_row_histogram_metrics_lessons_overlay(df_consolidate_time_series, colors_lessons, metrics):
     subtitles_array = []
     for metric in metrics:
         subtitles_array.append(f"Distribution for {metric}")
@@ -473,7 +473,7 @@ def generate_row_histogram_metrics_lessons_overlay(df_consolidate_time_series, c
             for lesson in df_consolidate_time_series:
                 state_show_legend = True if count_legend == 0 else False
                 fig.append_trace(generate_hist_by_metric_lessons(df_consolidate_time_series[lesson],
-                                                                 metric_value, colors_metrics,
+                                                                 metric_value, colors_lessons,
                                                                  lesson,
                                                                  state_show_legend), row, col)
             count_legend += 1

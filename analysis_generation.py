@@ -98,7 +98,7 @@ def generate_analysis_participant_lessons(root_path_data, id_participant, ids_le
         metrics)
 
     histograms_overlayed_row = plotting_tool.generate_row_histogram_metrics_lessons_overlay(
-        consolidate_metrics_lessons_unified,
+        processed_participant_lessons_data_ts,
         colors_lessons,
         metrics)
 
