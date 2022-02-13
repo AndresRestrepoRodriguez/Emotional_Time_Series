@@ -38,8 +38,8 @@ def generate_data_result_activity(json_data):
 def generate_data_result_general(data_results_activities):
     dict_values = {}
     name_activity = data_results_activities[0][0]
-    x_values = ["Total Questions", "Correct", "Incorrect", "Errors / Attempts"]
-    y_values = data_results_activities[0][1:]
+    x_values = ["Correct", "Incorrect", "Errors / Attempts"]
+    y_values = data_results_activities[0][2:]
     dict_values['x_values'] = x_values
     dict_values['y_values'] = y_values
     dict_values['name_activity'] = name_activity
@@ -50,10 +50,10 @@ def generate_data_results_activity_bar_grouped(data_results_activities):
     dict_values = {}
     x_values = []
     y_values = []
-    name_values = ["Total Questions", "Correct", "Incorrect", "Errors / Attempts"]
+    name_values = ["Correct", "Incorrect", "Errors / Attempts"]
     for value in data_results_activities[1:]:
         x_values.append(value[0])
-        y_values.append(value[1:])
+        y_values.append(value[2:])
     dict_values['x_values'] = x_values
     dict_values['y_values'] = np.array(y_values).T.tolist()
     dict_values['name_values'] = name_values
