@@ -84,11 +84,12 @@ def generate_analysis_participant_lessons(root_path_data, id_participant, ids_le
     consolidate_metrics_lessons_unified = graphics_processing.get_metric_all_lessons_consolidate(
         processed_participant_lessons_data_ts,
         metrics)
-    most_long_time_serie = processing_ts.get_most_long_time_series(processed_participant_lessons_data_ts)
+    most_long_time_serie_key = processing_ts.get_most_long_time_series(processed_participant_lessons_data_ts)
+    most_long_time_serie_data_ts = processed_participant_lessons_data_ts[most_long_time_serie_key]
 
     time_series_group_row = plotting_tool.generate_time_series_partipant_metrics(processed_participant_lessons_data_ts,
                                                                                  metrics,
-                                                                                 most_long_time_serie,
+                                                                                 most_long_time_serie_data_ts,
                                                                                  colors_lessons)
 
     histograms_unified_row = plotting_tool.generate_row_histogram_metrics_lessons_unified(
