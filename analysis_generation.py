@@ -68,6 +68,7 @@ def generate_analysis_participant_lesson(root_path_data, id_participant, id_less
 
     for row_graphic in rows_graphics_array:
         row_graphic.show()
+        print("\n\n")
 
 
 def generate_analysis_participant_lessons(root_path_data, id_participant, ids_lessons):
@@ -130,6 +131,7 @@ def generate_analysis_participant_lessons(root_path_data, id_participant, ids_le
 
     for row_graphic in rows_graphics_array:
         row_graphic.show()
+        print("\n\n")
 
 
 def generate_analysis_participant_lessons_activity(root_path_data, id_participant, ids_lessons, activity_info):
@@ -199,3 +201,4 @@ def generate_analysis_participant_lessons_activity(root_path_data, id_participan
 
     for row_graphic in rows_graphics_array:
         row_graphic.show()
+        print("\n\n")
