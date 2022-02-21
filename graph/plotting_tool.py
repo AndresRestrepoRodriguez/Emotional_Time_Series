@@ -66,6 +66,7 @@ def generate_time_series_plot(activities_info, dataframe_ts, metrics, colors_met
                    'color': '#000000'
                }},
         title_x=0.5,
+        title_y=0.95,
         xaxis_title="Time",
         yaxis_title="Performance Metrics Value",
         legend_title="Metrics")
@@ -149,6 +150,7 @@ def generate_row_histogram_metrics(dataframe_ts, colors_metrics, metrics, comple
                    'color': '#000000'
                }},
         title_x=0.5,
+        title_y=0.95,
         legend_title="Metrics",
         xaxis=dict(
             title="Values"
@@ -186,6 +188,7 @@ def generate_row_time(data_time_activity, data_time_bar_pie, complementary_title
                    'color': '#000000'
                }},
         title_x=0.5,
+        title_y=0.95,
         legend_title="Activities",
     )
     return fig
@@ -225,6 +228,7 @@ def generate_row_results(data_time_activity, data_time_bar_pie, data_result_bar,
                    'color': '#000000'
                }},
         title_x=0.5,
+        title_y=0.95,
     )
     return fig
 
@@ -257,6 +261,7 @@ def generate_heatmap_row(dataframe_ts, metrics, complementary_title):
                    'color': '#000000'
                }},
         title_x=0.5,
+        title_y=0.95,
         coloraxis={'colorscale': [(0, "white"), (0.5, "red"), (1, "blue")]}
     )
     return fig
@@ -311,6 +316,7 @@ def generate_time_series_partipant_metrics(dataframes_ts_lessons, metrics, df_ti
                    'color': '#000000'
                }},
         title_x=0.5,
+        title_y=0.95,
         legend_title="Lessons"
     )
     fig.update_xaxes(
@@ -414,6 +420,7 @@ def generate_row_time_participant_lessons(data_time_lessons, data_time_bar_pie, 
                    'color': '#000000'
                }},
         title_x=0.5,
+        title_y=0.95,
         legend_title="Activities",
     )
     return fig
@@ -449,6 +456,7 @@ def generate_row_histogram_metrics_lessons_unified(consolidate_metrics_lessons_u
                    'color': '#000000'
                }},
         title_x=0.5,
+        title_y=0.95,
         legend_title="Metrics",
         xaxis=dict(
             title="Values"
@@ -496,6 +504,7 @@ def generate_row_histogram_metrics_lessons_overlay(df_consolidate_time_series, c
                    'color': '#000000'
                }},
         title_x=0.5,
+        title_y=0.95,
         legend_title="Metrics",
         xaxis=dict(
             title="Values"
@@ -538,6 +547,7 @@ def generate_heatmap_row_lessons_overlay(df_consolidate_time_series, metrics, co
                    'color': '#000000'
                }},
         title_x=0.5,
+        title_y=0.95,
         coloraxis={'colorscale': [(0, "white"), (0.5, "red"), (1, "blue")]}
     )
     return fig
@@ -600,6 +610,7 @@ def generate_time_series_partipant_lesson_activity_metrics(dataframes_ts_lessons
                    'color': '#000000'
                }},
         title_x=0.5,
+        title_y=0.95,
         legend_title="Lessons"
     )
     return fig
@@ -631,6 +642,7 @@ def generate_row_histogram_metrics_lessons_activity_unified(consolidate_metrics_
                    'color': '#000000'
                }},
         title_x=0.5,
+        title_y=0.95,
         legend_title="Metrics",
         xaxis=dict(
             title="Values"
@@ -688,6 +700,7 @@ def generate_row_histogram_metrics_lessons_activity_overlay(df_consolidate_time_
                    'color': '#000000'
                }},
         title_x=0.5,
+        title_y=0.95,
         legend_title="Metrics",
         xaxis=dict(
             title="Values"
@@ -730,6 +743,7 @@ def generate_heatmap_row_lesson_activity_overlay(df_consolidate_time_series, met
                    'color': '#000000'
                }},
         title_x=0.5,
+        title_y=0.95,
         coloraxis={'colorscale': [(0, "white"), (0.5, "red"), (1, "blue")]}
     )
     return fig
@@ -764,6 +778,7 @@ def generate_row_time_participant_lessons_activity(data_time_lessons, data_time_
                    'color': '#000000'
                }},
         title_x=0.5,
+        title_y=0.95,
         legend_title="Activities",
     )
     return fig
