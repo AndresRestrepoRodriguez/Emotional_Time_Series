@@ -534,15 +534,17 @@ def generate_heatmap_row_lessons_overlay(df_consolidate_time_series, metrics):
 
 def generate_time_series_participant_metric_activity(dataframes_ts_lessons, metric, colors_lessons, showlegend):
     traces = []
+    real_state_showlegend = showlegend
     for key_lesson in dataframes_ts_lessons:
+        showlegend_value = real_state_showlegend
         data_activities_df = dataframes_ts_lessons[key_lesson]
         count_activity = 0
         for data_activity_df in data_activities_df:
-            if showlegend:
-                showlegend = True if count_activity == 0 else False
+            if showlegend_value:
+                showlegend_value = True if count_activity == 0 else False
             data_ts = data_activity_df
             traces.append(go.Scatter(x=data_ts.index, y=data_ts[metric], name=key_lesson, legendgroup=key_lesson,
-                                     line={'color': colors_lessons[key_lesson]}, mode="lines", showlegend=showlegend))
+                                     line={'color': colors_lessons[key_lesson]}, mode="lines", showlegend=showlegend_value))
             count_activity += 1
     return traces
 
