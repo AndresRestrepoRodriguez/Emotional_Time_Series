@@ -117,7 +117,7 @@ def generate_analysis_participant_lessons(root_path_data, id_participant, ids_le
         row_graphic.show()
 
 
-def generate_analysis_participant_lessons(root_path_data, id_participant, ids_lessons, activity_info):
+def generate_analysis_participant_lessons_activity(root_path_data, id_participant, ids_lessons, activity_info):
     participant_lessons_data_ts = load_data.load_participant_lessons_consolidate(root_path_data,
                                                                                  id_participant,
                                                                                  ids_lessons)
