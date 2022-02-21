@@ -542,7 +542,7 @@ def generate_time_series_participant_metric_activity(dataframes_ts_lessons, metr
                 showlegend = True if count_activity == 0 else False
             data_ts = data_activity_df
             traces.append(go.Scatter(x=data_ts.index, y=data_ts[metric], name=key_lesson, legendgroup=key_lesson,
-                                     line={'color': colors_lessons[key_lesson]}, showlegend=showlegend))
+                                     line={'color': colors_lessons[key_lesson]}, mode="lines", showlegend=showlegend))
             count_activity += 1
     return traces
 
