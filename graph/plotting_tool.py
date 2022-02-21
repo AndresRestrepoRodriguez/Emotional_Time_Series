@@ -62,11 +62,11 @@ def generate_time_series_plot(activities_info, dataframe_ts, metrics, colors_met
                        f'{complementary_title}',
                'font': {
                    'family': "Arial",
-                   'size': 18,
+                   'size': 19,
                    'color': '#000000'
                }},
         title_x=0.5,
-        title_y=0.95,
+        title_y=0.97,
         xaxis_title="Time",
         yaxis_title="Performance Metrics Value",
         legend_title="Metrics")
@@ -146,11 +146,11 @@ def generate_row_histogram_metrics(dataframe_ts, colors_metrics, metrics, comple
                        f'{complementary_title}',
                'font': {
                    'family': "Arial",
-                   'size': 18,
+                   'size': 19,
                    'color': '#000000'
                }},
         title_x=0.5,
-        title_y=0.95,
+        title_y=0.97,
         legend_title="Metrics",
         xaxis=dict(
             title="Values"
@@ -184,11 +184,11 @@ def generate_row_time(data_time_activity, data_time_bar_pie, complementary_title
                        f'{complementary_title}',
                'font': {
                    'family': "Arial",
-                   'size': 18,
+                   'size': 19,
                    'color': '#000000'
                }},
         title_x=0.5,
-        title_y=0.95,
+        title_y=0.97,
         legend_title="Activities",
     )
     return fig
@@ -224,11 +224,11 @@ def generate_row_results(data_time_activity, data_time_bar_pie, data_result_bar,
                        f'{complementary_title}',
                'font': {
                    'family': "Arial",
-                   'size': 18,
+                   'size': 19,
                    'color': '#000000'
                }},
         title_x=0.5,
-        title_y=0.95,
+        title_y=0.97,
     )
     return fig
 
@@ -257,11 +257,11 @@ def generate_heatmap_row(dataframe_ts, metrics, complementary_title):
                        f'{complementary_title}',
                'font': {
                    'family': "Arial",
-                   'size': 18,
+                   'size': 19,
                    'color': '#000000'
                }},
         title_x=0.5,
-        title_y=0.95,
+        title_y=0.97,
         coloraxis={'colorscale': [(0, "white"), (0.5, "red"), (1, "blue")]}
     )
     return fig
@@ -312,11 +312,11 @@ def generate_time_series_partipant_metrics(dataframes_ts_lessons, metrics, df_ti
                        f'{complementary_title}',
                'font': {
                    'family': "Arial",
-                   'size': 18,
+                   'size': 19,
                    'color': '#000000'
                }},
         title_x=0.5,
-        title_y=0.95,
+        title_y=0.97,
         legend_title="Lessons"
     )
     fig.update_xaxes(
@@ -375,7 +375,7 @@ def generate_row_results_participant_lessons(data_time_activity, data_time_bar_p
         title={'text': ' <b> Results <br> <b>',
                'font': {
                    'family': "Arial",
-                   'size': 18,
+                   'size': 19,
                    'color': '#000000'
                }},
         title_x=0.5,
@@ -416,11 +416,11 @@ def generate_row_time_participant_lessons(data_time_lessons, data_time_bar_pie, 
                        f'{complementary_title}',
                'font': {
                    'family': "Arial",
-                   'size': 18,
+                   'size': 19,
                    'color': '#000000'
                }},
         title_x=0.5,
-        title_y=0.95,
+        title_y=0.97,
         legend_title="Activities",
     )
     return fig
@@ -452,11 +452,11 @@ def generate_row_histogram_metrics_lessons_unified(consolidate_metrics_lessons_u
                        f'{complementary_title}',
                'font': {
                    'family': "Arial",
-                   'size': 18,
+                   'size': 19,
                    'color': '#000000'
                }},
         title_x=0.5,
-        title_y=0.95,
+        title_y=0.97,
         legend_title="Metrics",
         xaxis=dict(
             title="Values"
@@ -500,11 +500,11 @@ def generate_row_histogram_metrics_lessons_overlay(df_consolidate_time_series, c
                        f'{complementary_title}',
                'font': {
                    'family': "Arial",
-                   'size': 18,
+                   'size': 19,
                    'color': '#000000'
                }},
         title_x=0.5,
-        title_y=0.95,
+        title_y=0.97,
         legend_title="Metrics",
         xaxis=dict(
             title="Values"
@@ -543,11 +543,11 @@ def generate_heatmap_row_lessons_overlay(df_consolidate_time_series, metrics, co
                        f'{complementary_title}',
                'font': {
                    'family': "Arial",
-                   'size': 18,
+                   'size': 19,
                    'color': '#000000'
                }},
         title_x=0.5,
-        title_y=0.95,
+        title_y=0.97,
         coloraxis={'colorscale': [(0, "white"), (0.5, "red"), (1, "blue")]}
     )
     return fig
@@ -606,11 +606,11 @@ def generate_time_series_partipant_lesson_activity_metrics(dataframes_ts_lessons
                        f'{complementary_title}',
                'font': {
                    'family': "Arial",
-                   'size': 18,
+                   'size': 19,
                    'color': '#000000'
                }},
         title_x=0.5,
-        title_y=0.95,
+        title_y=0.97,
         legend_title="Lessons"
     )
     return fig
@@ -638,11 +638,11 @@ def generate_row_histogram_metrics_lessons_activity_unified(consolidate_metrics_
                        f'{complementary_title}',
                'font': {
                    'family': "Arial",
-                   'size': 18,
+                   'size': 19,
                    'color': '#000000'
                }},
         title_x=0.5,
-        title_y=0.95,
+        title_y=0.97,
         legend_title="Metrics",
         xaxis=dict(
             title="Values"
@@ -696,11 +696,11 @@ def generate_row_histogram_metrics_lessons_activity_overlay(df_consolidate_time_
                        f'{complementary_title}',
                'font': {
                    'family': "Arial",
-                   'size': 18,
+                   'size': 19,
                    'color': '#000000'
                }},
         title_x=0.5,
-        title_y=0.95,
+        title_y=0.97,
         legend_title="Metrics",
         xaxis=dict(
             title="Values"
@@ -739,11 +739,11 @@ def generate_heatmap_row_lesson_activity_overlay(df_consolidate_time_series, met
                        f'{complementary_title}',
                'font': {
                    'family': "Arial",
-                   'size': 18,
+                   'size': 19,
                    'color': '#000000'
                }},
         title_x=0.5,
-        title_y=0.95,
+        title_y=0.97,
         coloraxis={'colorscale': [(0, "white"), (0.5, "red"), (1, "blue")]}
     )
     return fig
@@ -774,11 +774,11 @@ def generate_row_time_participant_lessons_activity(data_time_lessons, data_time_
                        f'{complementary_title}',
                'font': {
                    'family': "Arial",
-                   'size': 18,
+                   'size': 19,
                    'color': '#000000'
                }},
         title_x=0.5,
-        title_y=0.95,
+        title_y=0.97,
         legend_title="Activities",
     )
     return fig
