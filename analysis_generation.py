@@ -41,7 +41,9 @@ def generate_analysis_participant_lesson(root_path_data, id_participant, id_less
                                                               data_ts_processed_participant_lesson,
                                                               metrics,
                                                               colors_metrics,
-                                                              dict_colores)
+                                                              dict_colores,
+                                                              id_participant,
+                                                              id_lesson)
 
     histogram_row = plotting_tool.generate_row_histogram_metrics(data_ts_processed_participant_lesson,
                                                                  colors_metrics,

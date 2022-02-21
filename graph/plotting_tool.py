@@ -44,7 +44,7 @@ def get_plot_ts(dataframe_ts, metrics_list, colors_metrics, zone_data, dict_colo
     plt.show()
 
 
-def generate_time_series_plot(activities_info, dataframe_ts, metrics, colors_metrics, colors_activities):
+def generate_time_series_plot(activities_info, dataframe_ts, metrics, colors_metrics, colors_activities, id_participant, id_lesson):
     fig = go.Figure()
     for metric in metrics:
         fig.add_trace(go.Scatter(x=dataframe_ts.index, y=dataframe_ts[metric], line={'color': colors_metrics[metric]},
@@ -57,10 +57,8 @@ def generate_time_series_plot(activities_info, dataframe_ts, metrics, colors_met
         )
     fig.update_annotations(font_size=15, font_color='#000000')
     fig.update_layout(
-        title={'text': ' <b> Record Performance Metrics Participant Id. ' + str(
-            int(re.findall(r'\d+', dataframe_ts['user_id'].iloc[0])[0]) + 1) + '<br> Interaction with lesson No. ' +
-                       str(int(
-                           re.findall(r'\d+', dataframe_ts['lesson'].iloc[0])[0])) + ' Language: Portuguese <br> <b>',
+        title={'text': f' <b> Record Performance Metrics <br> User: {id_participant} '
+                       f' Lesson: {id_lesson} <br> <b>',
                'font': {
                    'family': "Arial",
                    'size': 20,
@@ -127,7 +125,7 @@ def generate_heatmap_time_series(x_values, y_values):
     )
 
 
-def generate_row_histogram_metrics(dataframe_ts, colors_metrics, metrics):
+def generate_row_histogram_metrics(dataframe_ts, colors_metrics, metrics, id_participant, id_lesson):
     subtitles_array = []
     for metric in metrics:
         subtitles_array.append(f"Distribution for {metric}")
@@ -142,7 +140,8 @@ def generate_row_histogram_metrics(dataframe_ts, colors_metrics, metrics):
             fig.add_trace(generate_hist_by_metric(dataframe_ts, metrics[pos_metric], colors_metrics), row, col)
     fig = go.Figure(fig)
     fig.update_layout(
-        title={'text': ' <b> Distirbution Performance Metrics <br> <b>',
+        title={'text': f' <b> Distribution of Performance Metrics '
+                       f'<br> User: {id_participant} Lesson: {id_lesson} <br> <b>',
                'font': {
                    'family': "Arial",
                    'size': 20,
@@ -157,7 +156,7 @@ def generate_row_histogram_metrics(dataframe_ts, colors_metrics, metrics):
     return fig
 
 
-def generate_row_time(data_time_activity, data_time_bar_pie):
+def generate_row_time(data_time_activity, data_time_bar_pie, id_participant, id_lesson):
     # data_time_activity = generate_data_time_activity(json_data)
     # data_time_bar_pie = generate_data_time_activity_bar(data_time_activity)
     rows = 1
@@ -178,7 +177,8 @@ def generate_row_time(data_time_activity, data_time_bar_pie):
     fig['layout']['xaxis']['title'] = 'Activity'
     fig['layout']['yaxis']['title'] = 'Time (s)'
     fig.update_layout(
-        title={'text': ' <b> Time Measurement <br> <b>',
+        title={'text': f' <b> Time Measurement '
+                       f'<br> User: {id_participant} Lesson: {id_lesson} <br> <b>',
                'font': {
                    'family': "Arial",
                    'size': 20,
@@ -190,7 +190,7 @@ def generate_row_time(data_time_activity, data_time_bar_pie):
     return fig
 
 
-def generate_row_results(data_time_activity, data_time_bar_pie, data_result_bar):
+def generate_row_results(data_time_activity, data_time_bar_pie, data_result_bar, id_participant, id_lesson):
     # data_time_activity = generate_data_result_activity(json_data)
     # data_time_bar_pie = generate_data_result_general(data_time_activity)
     # data_result_bar = generate_data_results_activity_bar_grouped(data_time_activity)
@@ -216,7 +216,8 @@ def generate_row_results(data_time_activity, data_time_bar_pie, data_result_bar)
     layout = go.Layout(barmode='group', )
     fig = go.Figure(fig, layout=layout)
     fig.update_layout(
-        title={'text': ' <b> Results <br> <b>',
+        title={'text': f' <b> Questions Results '
+                       f'<br> User: {id_participant} Lesson: {id_lesson} <br> <b>',
                'font': {
                    'family': "Arial",
                    'size': 20,
@@ -227,7 +228,7 @@ def generate_row_results(data_time_activity, data_time_bar_pie, data_result_bar)
     return fig
 
 
-def generate_heatmap_row(dataframe_ts, metrics):
+def generate_heatmap_row(dataframe_ts, metrics, id_participant, id_lesson):
     subtitles_array = []
     rows = 1
     columns = len(metrics) // 2
@@ -247,7 +248,8 @@ def generate_heatmap_row(dataframe_ts, metrics):
             fig.add_trace(generate_heatmap_time_series(x_value_time, y_value_metric), row, col)
     fig = go.Figure(fig)
     fig.update_layout(
-        title={'text': ' <b> Heatmap Performance Metrics <br> <b>',
+        title={'text': f' <b> Heatmap Performance Metrics '
+                       f'<br> User: {id_participant} Lesson: {id_lesson} <br> <b>',
                'font': {
                    'family': "Arial",
                    'size': 20,
