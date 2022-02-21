@@ -150,22 +150,26 @@ def generate_analysis_participant_lessons_activity(root_path_data, id_participan
     participant_lesson_activity_results_bar = graphics_processing.generate_data_results_lessons_bar_grouped(
         participant_lesson_activity_results)
 
-    time_series_group_row = plotting_tool.generate_time_series_partipant_lesson_activity_metrics(
+    time_series_group_activity_row = plotting_tool.generate_time_series_partipant_lesson_activity_metrics(
         participant_activity_lessons_data_ts_processed_reset, metrics, colors_lessons)
-    histograms_unified_row = plotting_tool.generate_row_histogram_metrics_lessons_activity_unified(
+    histograms_unified_activity_row = plotting_tool.generate_row_histogram_metrics_lessons_activity_unified(
         consolidate_metrics_lessons_unified, colors_metrics, metrics)
-    histograms_overlayed_row = plotting_tool.generate_row_histogram_metrics_lessons_activity_overlay(
+    histograms_overlayed_activity_row = plotting_tool.generate_row_histogram_metrics_lessons_activity_overlay(
         participant_activity_lessons_data_ts_processed_reset, colors_lessons, metrics)
-    heatmaps_row = plotting_tool.generate_heatmap_row_lesson_activity_overlay(
+    heatmaps_activity_row = plotting_tool.generate_heatmap_row_lesson_activity_overlay(
         participant_activity_lessons_data_ts_processed_reset, metrics)
-    time_row = plotting_tool.generate_row_time_participant_lessons_activity(time_lesson_activity,
-                                                                            time_lesson_activity_bar_pie)
-    results_row = plotting_tool.generate_row_results(participant_lesson_activity_results,
-                                                     participant_lesson_activity_results_pie,
-                                                     participant_lesson_activity_results_bar)
+    time_activity_row = plotting_tool.generate_row_time_participant_lessons_activity(time_lesson_activity,
+                                                                                     time_lesson_activity_bar_pie)
+    results_activity_row = plotting_tool.generate_row_results(participant_lesson_activity_results,
+                                                              participant_lesson_activity_results_pie,
+                                                              participant_lesson_activity_results_bar)
 
-    rows_graphics_array = [time_series_group_row, histograms_unified_row, histograms_overlayed_row,
-                           heatmaps_row, time_row, results_row]
+    rows_graphics_array = [time_series_group_activity_row,
+                           histograms_unified_activity_row,
+                           histograms_overlayed_activity_row,
+                           heatmaps_activity_row,
+                           time_activity_row,
+                           results_activity_row]
 
     for row_graphic in rows_graphics_array:
         row_graphic.show()
