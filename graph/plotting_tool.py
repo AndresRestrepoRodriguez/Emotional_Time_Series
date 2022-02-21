@@ -44,7 +44,8 @@ def get_plot_ts(dataframe_ts, metrics_list, colors_metrics, zone_data, dict_colo
     plt.show()
 
 
-def generate_time_series_plot(activities_info, dataframe_ts, metrics, colors_metrics, colors_activities, id_participant, id_lesson):
+def generate_time_series_plot(activities_info, dataframe_ts, metrics, colors_metrics, colors_activities,
+                              complementary_title):
     fig = go.Figure()
     for metric in metrics:
         fig.add_trace(go.Scatter(x=dataframe_ts.index, y=dataframe_ts[metric], line={'color': colors_metrics[metric]},
@@ -57,8 +58,8 @@ def generate_time_series_plot(activities_info, dataframe_ts, metrics, colors_met
         )
     fig.update_annotations(font_size=15, font_color='#000000')
     fig.update_layout(
-        title={'text': f' <b> Record Performance Metrics <br> User: {id_participant} '
-                       f' Lesson: {id_lesson} <br> <b>',
+        title={'text': f' <b> Record Performance Metrics <br> '
+                       f'{complementary_title}',
                'font': {
                    'family': "Arial",
                    'size': 20,
@@ -125,7 +126,7 @@ def generate_heatmap_time_series(x_values, y_values):
     )
 
 
-def generate_row_histogram_metrics(dataframe_ts, colors_metrics, metrics, id_participant, id_lesson):
+def generate_row_histogram_metrics(dataframe_ts, colors_metrics, metrics, complementary_title):
     subtitles_array = []
     for metric in metrics:
         subtitles_array.append(f"Distribution for {metric}")
@@ -141,7 +142,7 @@ def generate_row_histogram_metrics(dataframe_ts, colors_metrics, metrics, id_par
     fig = go.Figure(fig)
     fig.update_layout(
         title={'text': f' <b> Distribution of Performance Metrics '
-                       f'<br> User: {id_participant} Lesson: {id_lesson} <br> <b>',
+                       f'{complementary_title}',
                'font': {
                    'family': "Arial",
                    'size': 20,
@@ -156,7 +157,7 @@ def generate_row_histogram_metrics(dataframe_ts, colors_metrics, metrics, id_par
     return fig
 
 
-def generate_row_time(data_time_activity, data_time_bar_pie, id_participant, id_lesson):
+def generate_row_time(data_time_activity, data_time_bar_pie, complementary_title):
     # data_time_activity = generate_data_time_activity(json_data)
     # data_time_bar_pie = generate_data_time_activity_bar(data_time_activity)
     rows = 1
@@ -178,7 +179,7 @@ def generate_row_time(data_time_activity, data_time_bar_pie, id_participant, id_
     fig['layout']['yaxis']['title'] = 'Time (s)'
     fig.update_layout(
         title={'text': f' <b> Time Measurement '
-                       f'<br> User: {id_participant} Lesson: {id_lesson} <br> <b>',
+                       f'{complementary_title}',
                'font': {
                    'family': "Arial",
                    'size': 20,
@@ -190,7 +191,7 @@ def generate_row_time(data_time_activity, data_time_bar_pie, id_participant, id_
     return fig
 
 
-def generate_row_results(data_time_activity, data_time_bar_pie, data_result_bar, id_participant, id_lesson):
+def generate_row_results(data_time_activity, data_time_bar_pie, data_result_bar, complementary_title):
     # data_time_activity = generate_data_result_activity(json_data)
     # data_time_bar_pie = generate_data_result_general(data_time_activity)
     # data_result_bar = generate_data_results_activity_bar_grouped(data_time_activity)
@@ -216,8 +217,8 @@ def generate_row_results(data_time_activity, data_time_bar_pie, data_result_bar,
     layout = go.Layout(barmode='group', )
     fig = go.Figure(fig, layout=layout)
     fig.update_layout(
-        title={'text': f' <b> Questions Results '
-                       f'<br> User: {id_participant} Lesson: {id_lesson} <br> <b>',
+        title={'text': f' <b> Questions Results <br>'
+                       f'{complementary_title}',
                'font': {
                    'family': "Arial",
                    'size': 20,
@@ -228,7 +229,7 @@ def generate_row_results(data_time_activity, data_time_bar_pie, data_result_bar,
     return fig
 
 
-def generate_heatmap_row(dataframe_ts, metrics, id_participant, id_lesson):
+def generate_heatmap_row(dataframe_ts, metrics, complementary_title):
     subtitles_array = []
     rows = 1
     columns = len(metrics) // 2
@@ -249,7 +250,7 @@ def generate_heatmap_row(dataframe_ts, metrics, id_participant, id_lesson):
     fig = go.Figure(fig)
     fig.update_layout(
         title={'text': f' <b> Heatmap Performance Metrics '
-                       f'<br> User: {id_participant} Lesson: {id_lesson} <br> <b>',
+                       f'{complementary_title}',
                'font': {
                    'family': "Arial",
                    'size': 20,
@@ -270,7 +271,8 @@ def generate_time_series_participant_metric(dataframes_ts_lessons, metric, color
     return traces
 
 
-def generate_time_series_partipant_metrics(dataframes_ts_lessons, metrics, df_time_series_long_xaxis, colors_lessons):
+def generate_time_series_partipant_metrics(dataframes_ts_lessons, metrics, df_time_series_long_xaxis, colors_lessons,
+                                           complementary_title):
     # df_time_series_long_xaxis = dataframes_ts_lessons[get_most_long_time_series(df_consolidate)]
 
     subtitles_array = []
@@ -301,7 +303,8 @@ def generate_time_series_partipant_metrics(dataframes_ts_lessons, metrics, df_ti
                 fig.append_trace(trace, row, column)
 
     fig.update_layout(
-        title={'text': ' <b> Time Series Agrupation by Metrics <br> <b>',
+        title={'text': f' <b> Performance Metric Recording Pool <br>'
+                       f'{complementary_title}',
                'font': {
                    'family': "Arial",
                    'size': 20,
@@ -382,7 +385,7 @@ def generate_pie_lessons_time(data_time_activity, legend_show=True):
     return go.Pie(values=data_time_activity["y_values"], labels=data_time_activity["x_values"], showlegend=legend_show)
 
 
-def generate_row_time_participant_lessons(data_time_lessons, data_time_bar_pie):
+def generate_row_time_participant_lessons(data_time_lessons, data_time_bar_pie, complementary_title):
     # data_time_activity = generate_data_time_activity(json_data)
     # data_time_bar_pie = generate_data_time_activity_bar(data_time_activity)
     rows = 1
@@ -403,7 +406,8 @@ def generate_row_time_participant_lessons(data_time_lessons, data_time_bar_pie):
     fig['layout']['xaxis']['title'] = 'Lesson'
     fig['layout']['yaxis']['title'] = 'Time (s)'
     fig.update_layout(
-        title={'text': ' <b> Time Measurement <br> <b>',
+        title={'text': f' <b> Time Measurement '
+                       f'{complementary_title}',
                'font': {
                    'family': "Arial",
                    'size': 20,
@@ -419,7 +423,8 @@ def generate_hist_by_metric_unified(values, metric, colors_metrics):
     return go.Histogram(x=values, marker_color=colors_metrics[metric], name=metric)
 
 
-def generate_row_histogram_metrics_lessons_unified(consolidate_metrics_lessons_unified, colors_metrics, metrics):
+def generate_row_histogram_metrics_lessons_unified(consolidate_metrics_lessons_unified, colors_metrics, metrics,
+                                                   complementary_title):
     subtitles_array = []
     for metric in metrics:
         subtitles_array.append(f"Distribution for {metric}")
@@ -436,7 +441,8 @@ def generate_row_histogram_metrics_lessons_unified(consolidate_metrics_lessons_u
             fig.add_trace(generate_hist_by_metric_unified(data_values, metric_value, colors_metrics), row, col)
     fig = go.Figure(fig)
     fig.update_layout(
-        title={'text': ' <b> Distirbution Performance Metrics Lessons Grouped <br> <b>',
+        title={'text': f' <b> Performance Metrics Distribution Unification <br>'
+                       f'{complementary_title}',
                'font': {
                    'family': "Arial",
                    'size': 20,
@@ -457,7 +463,8 @@ def generate_hist_by_metric_lessons(dataframe_ts, metric, colors_lessons, lesson
                         name=lesson, legendgroup=lesson, showlegend=showlegend)
 
 
-def generate_row_histogram_metrics_lessons_overlay(df_consolidate_time_series, colors_lessons, metrics):
+def generate_row_histogram_metrics_lessons_overlay(df_consolidate_time_series, colors_lessons, metrics,
+                                                   complementary_title):
     subtitles_array = []
     for metric in metrics:
         subtitles_array.append(f"Distribution for {metric}")
@@ -481,7 +488,8 @@ def generate_row_histogram_metrics_lessons_overlay(df_consolidate_time_series, c
             count_legend += 1
     fig = go.Figure(fig)
     fig.update_layout(
-        title={'text': ' <b> Distirbution Performance Metrics Overlay Lesson <br> <b>',
+        title={'text': f' <b> Performance Metrics Distribution Overlay '
+                       f'{complementary_title}',
                'font': {
                    'family': "Arial",
                    'size': 20,
@@ -500,7 +508,7 @@ def generate_row_histogram_metrics_lessons_overlay(df_consolidate_time_series, c
     return fig
 
 
-def generate_heatmap_row_lessons_overlay(df_consolidate_time_series, metrics):
+def generate_heatmap_row_lessons_overlay(df_consolidate_time_series, metrics, complementary_title):
     subtitles_array = []
     rows = 1
     columns = len(metrics) // 2
@@ -522,7 +530,8 @@ def generate_heatmap_row_lessons_overlay(df_consolidate_time_series, metrics):
                 fig.append_trace(generate_heatmap_time_series(x_value_time, y_value_metric), row, col)
     fig = go.Figure(fig)
     fig.update_layout(
-        title={'text': ' <b> Heatmap Performance Metrics <br> <b>',
+        title={'text': f' <b> Heatmap Performance Metrics Overlay <br>'
+                       f'{complementary_title}',
                'font': {
                    'family': "Arial",
                    'size': 20,
@@ -551,7 +560,8 @@ def generate_time_series_participant_metric_activity(dataframes_ts_lessons, metr
     return traces
 
 
-def generate_time_series_partipant_lesson_activity_metrics(dataframes_ts_lessons, metrics, colors_lessons):
+def generate_time_series_partipant_lesson_activity_metrics(dataframes_ts_lessons, metrics, colors_lessons,
+                                                           complementary_title):
     # df_time_series_long_xaxis = dataframes_ts_lessons[get_most_long_time_series(df_consolidate)]
 
     subtitles_array = []
@@ -582,7 +592,8 @@ def generate_time_series_partipant_lesson_activity_metrics(dataframes_ts_lessons
                 fig.append_trace(trace, row, column)
 
     fig.update_layout(
-        title={'text': ' <b> Time Series Agrupation by Metrics <br> <b>',
+        title={'text': f' <b> Performance Metric Recording Pool <br> '
+                       f'{complementary_title}',
                'font': {
                    'family': "Arial",
                    'size': 20,
@@ -595,7 +606,7 @@ def generate_time_series_partipant_lesson_activity_metrics(dataframes_ts_lessons
 
 
 def generate_row_histogram_metrics_lessons_activity_unified(consolidate_metrics_lessons_unified, colors_metrics,
-                                                            metrics):
+                                                            metrics, complementary_title):
     subtitles_array = []
     for metric in metrics:
         subtitles_array.append(f"Distribution for {metric}")
@@ -612,7 +623,8 @@ def generate_row_histogram_metrics_lessons_activity_unified(consolidate_metrics_
             fig.add_trace(generate_hist_by_metric_unified(data_values, metric_value, colors_metrics), row, col)
     fig = go.Figure(fig)
     fig.update_layout(
-        title={'text': ' <b> Distirbution Performance Metrics Lessons Grouped <br> <b>',
+        title={'text': f' <b> Performance Metrics Distribution Unification <br>'
+                       f'{complementary_title}',
                'font': {
                    'family': "Arial",
                    'size': 20,
@@ -641,7 +653,8 @@ def generate_hist_by_metric_lessons_activity(dataframe_ts, metric, colors_lesson
     return hist_activities_lesson
 
 
-def generate_row_histogram_metrics_lessons_activity_overlay(df_consolidate_time_series, colors_lessons, metrics):
+def generate_row_histogram_metrics_lessons_activity_overlay(df_consolidate_time_series, colors_lessons, metrics,
+                                                            complementary_title):
     subtitles_array = []
     for metric in metrics:
         subtitles_array.append(f"Distribution for {metric}")
@@ -667,7 +680,8 @@ def generate_row_histogram_metrics_lessons_activity_overlay(df_consolidate_time_
             count_legend += 1
     fig = go.Figure(fig)
     fig.update_layout(
-        title={'text': ' <b> Distirbution Performance Metrics Overlay Lesson <br> <b>',
+        title={'text': f' <b> Performance Metrics Distribution Overlay <br>'
+                       f'{complementary_title}',
                'font': {
                    'family': "Arial",
                    'size': 20,
@@ -686,10 +700,8 @@ def generate_row_histogram_metrics_lessons_activity_overlay(df_consolidate_time_
     return fig
 
 
-def generate_heatmap_row_lesson_activity_overlay(df_consolidate_time_series, metrics):
+def generate_heatmap_row_lesson_activity_overlay(df_consolidate_time_series, metrics, complementary_title):
     subtitles_array = []
-    rows = 1
-    columns = len(metrics) // 2
     for metric in metrics:
         subtitles_array.append(f"Heatmap for {metric}")
     subplot_titles = tuple(subtitles_array)
@@ -710,7 +722,8 @@ def generate_heatmap_row_lesson_activity_overlay(df_consolidate_time_series, met
                     fig.append_trace(generate_heatmap_time_series(x_value_time, y_value_metric), row, col)
     fig = go.Figure(fig)
     fig.update_layout(
-        title={'text': ' <b> Heatmap Performance Metrics <br> <b>',
+        title={'text': f' <b> Heatmap Performance Metrics Overlay <br>'
+                       f'{complementary_title}',
                'font': {
                    'family': "Arial",
                    'size': 20,
@@ -722,7 +735,7 @@ def generate_heatmap_row_lesson_activity_overlay(df_consolidate_time_series, met
     return fig
 
 
-def generate_row_time_participant_lessons_activity(data_time_lessons, data_time_bar_pie):
+def generate_row_time_participant_lessons_activity(data_time_lessons, data_time_bar_pie, complementary_title):
     # data_time_activity = generate_data_time_activity(json_data)
     # data_time_bar_pie = generate_data_time_activity_bar(data_time_activity)
     rows = 1
@@ -743,7 +756,8 @@ def generate_row_time_participant_lessons_activity(data_time_lessons, data_time_
     fig['layout']['xaxis']['title'] = 'Lesson'
     fig['layout']['yaxis']['title'] = 'Time (s)'
     fig.update_layout(
-        title={'text': ' <b> Time Measurement <br> <b>',
+        title={'text': f' <b> Time Measurement <br>'
+                       f'{complementary_title}',
                'font': {
                    'family': "Arial",
                    'size': 20,
