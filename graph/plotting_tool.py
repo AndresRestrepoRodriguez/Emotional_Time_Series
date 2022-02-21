@@ -530,3 +530,224 @@ def generate_heatmap_row_lessons_overlay(df_consolidate_time_series, metrics):
         coloraxis={'colorscale': [(0, "white"), (0.5, "red"), (1, "blue")]}
     )
     return fig
+
+
+def generate_time_series_participant_metric_activity(dataframes_ts_lessons, metric, colors_lessons, showlegend):
+    traces = []
+    for key_lesson in dataframes_ts_lessons:
+        data_activities_df = dataframes_ts_lessons[key_lesson]
+        count_activity = 0
+        for data_activity_df in data_activities_df:
+            if showlegend:
+                showlegend = True if count_activity == 0 else False
+            data_ts = data_activity_df
+            traces.append(go.Scatter(x=data_ts.index, y=data_ts[metric], name=key_lesson, legendgroup=key_lesson,
+                                     line={'color': colors_lessons[key_lesson]}, showlegend=showlegend))
+            count_activity += 1
+    return traces
+
+
+def generate_time_series_partipant_lesson_activity_metrics(dataframes_ts_lessons, metrics, colors_lessons):
+    # df_time_series_long_xaxis = dataframes_ts_lessons[get_most_long_time_series(df_consolidate)]
+
+    subtitles_array = []
+    for metric in metrics:
+        subtitles_array.append(f"Time serie {metric}")
+    subplot_titles = tuple(subtitles_array)
+
+    count_metric = 0
+    dict_traces_metrics = {}
+    for metric in metrics:
+        showlegend_value = True if count_metric == 0 else False
+        dict_traces_metrics[metric] = generate_time_series_participant_metric_activity(dataframes_ts_lessons,
+                                                                                       metric, colors_lessons,
+                                                                                       showlegend_value)
+        count_metric += 1
+
+    rows = 3
+    columns = 2
+    fig = make_subplots(rows=rows, cols=columns,
+                        subplot_titles=subplot_titles)
+
+    for row in range(1, rows + 1):
+        for column in range(1, columns + 1):
+            pos_metric = ((row - 1) * columns) + (column - 1)
+            metrics_val = metrics[pos_metric]
+            traces = dict_traces_metrics[metrics_val]
+            for trace in traces:
+                fig.append_trace(trace, row, column)
+
+    fig.update_layout(
+        title={'text': ' <b> Time Series Agrupation by Metrics <br> <b>',
+               'font': {
+                   'family': "Arial",
+                   'size': 20,
+                   'color': '#000000'
+               }},
+        title_x=0.5,
+        legend_title="Lessons"
+    )
+    return fig
+
+
+def generate_row_histogram_metrics_lessons_activity_unified(consolidate_metrics_lessons_unified, colors_metrics,
+                                                            metrics):
+    subtitles_array = []
+    for metric in metrics:
+        subtitles_array.append(f"Distribution for {metric}")
+    subplot_titles = tuple(subtitles_array)
+    rows = 2
+    columns = len(metrics) // 2
+    fig = make_subplots(rows=rows, cols=columns, x_title='Metric value',
+                        y_title='Frecuency', subplot_titles=subplot_titles)
+    for row in range(1, rows + 1):
+        for col in range(1, columns + 1):
+            pos_metric = ((row - 1) * columns) + (col - 1)
+            metric_value = metrics[pos_metric]
+            data_values = consolidate_metrics_lessons_unified[metric_value]
+            fig.add_trace(generate_hist_by_metric_unified(data_values, metric_value, colors_metrics), row, col)
+    fig = go.Figure(fig)
+    fig.update_layout(
+        title={'text': ' <b> Distirbution Performance Metrics Lessons Grouped <br> <b>',
+               'font': {
+                   'family': "Arial",
+                   'size': 20,
+                   'color': '#000000'
+               }},
+        title_x=0.5,
+        legend_title="Metrics",
+        xaxis=dict(
+            title="Values"
+        )
+    )
+    return fig
+
+
+def generate_hist_by_metric_lessons_activity(dataframe_ts, metric, colors_lessons, lesson, showlegend=True):
+    values_tmp = []
+    hist_activities_lesson = []
+    count_activity = 0
+    for activity_value in dataframe_ts:
+        if showlegend:
+            showlegend = True if count_activity == 0 else False
+        values = activity_value[metric].values
+        hist_activities_lesson.append(go.Histogram(x=values, marker_color=colors_lessons[lesson],
+                                                   name=lesson, legendgroup=lesson, showlegend=showlegend))
+        count_activity += 1
+    return hist_activities_lesson
+
+
+def generate_row_histogram_metrics_lessons_activity_overlay(df_consolidate_time_series, colors_lessons, metrics):
+    subtitles_array = []
+    for metric in metrics:
+        subtitles_array.append(f"Distribution for {metric}")
+    subplot_titles = tuple(subtitles_array)
+    rows = 2
+    columns = len(metrics) // 2
+    fig = make_subplots(rows=rows, cols=columns, x_title='Metric value',
+                        y_title='Frecuency', subplot_titles=subplot_titles)
+    count_legend = 0
+    for row in range(1, rows + 1):
+        for col in range(1, columns + 1):
+            pos_metric = ((row - 1) * columns) + (col - 1)
+            metric_value = metrics[pos_metric]
+
+            for lesson in df_consolidate_time_series:
+                state_show_legend = True if count_legend == 0 else False
+                list_hist_lesson_activity = generate_hist_by_metric_lessons_activity(df_consolidate_time_series[lesson],
+                                                                                     metric_value, colors_lessons,
+                                                                                     lesson,
+                                                                                     state_show_legend)
+                for hist_activity_dist in list_hist_lesson_activity:
+                    fig.append_trace(hist_activity_dist, row, col)
+            count_legend += 1
+    fig = go.Figure(fig)
+    fig.update_layout(
+        title={'text': ' <b> Distirbution Performance Metrics Overlay Lesson <br> <b>',
+               'font': {
+                   'family': "Arial",
+                   'size': 20,
+                   'color': '#000000'
+               }},
+        title_x=0.5,
+        legend_title="Metrics",
+        xaxis=dict(
+            title="Values"
+        )
+    )
+    # Overlay both histograms
+    fig.update_layout(barmode='overlay')
+    # Reduce opacity to see both histograms
+    fig.update_traces(opacity=0.75)
+    return fig
+
+
+def generate_heatmap_row_lessons_overlay(df_consolidate_time_series, metrics):
+    subtitles_array = []
+    rows = 1
+    columns = len(metrics) // 2
+    for metric in metrics:
+        subtitles_array.append(f"Heatmap for {metric}")
+    subplot_titles = tuple(subtitles_array)
+    rows = 2
+    columns = len(metrics) // 2
+    fig = make_subplots(rows=rows, cols=columns, x_title='Time (s)',
+                        y_title='Performance Metric Value', subplot_titles=subplot_titles)
+
+    for row in range(1, rows + 1):
+        for col in range(1, columns + 1):
+            pos_metric = ((row - 1) * columns) + (col - 1)
+            metric = metrics[pos_metric]
+            for lesson in df_consolidate_time_series:
+              activities_consolidate = df_consolidate_time_series[lesson]
+              for activity in activities_consolidate:
+                x_value_time = activity.index
+                y_value_metric = activity[metric].values
+                fig.append_trace(generate_heatmap_time_series(x_value_time, y_value_metric), row, col)
+    fig = go.Figure(fig)
+    fig.update_layout(
+        title={'text': ' <b> Heatmap Performance Metrics <br> <b>',
+               'font': {
+                   'family': "Arial",
+                   'size': 20,
+                   'color': '#000000'
+               }},
+        title_x=0.5,
+        coloraxis={'colorscale': [(0, "white"), (0.5, "red"), (1, "blue")]}
+    )
+    return fig
+
+
+def generate_row_time_participant_lessons_activity(data_time_lessons, data_time_bar_pie):
+    # data_time_activity = generate_data_time_activity(json_data)
+    # data_time_bar_pie = generate_data_time_activity_bar(data_time_activity)
+    rows = 1
+    columns = 3
+    subplot_titles = ("Time by Lesson", "Time by Lesson Bar plot", "Time Porcentage by Lesson")
+    header_table = ["Lesson", "Time"]
+    specs = [[{'type': 'domain'}, {'type': 'bar'}, {'type': 'pie'}]]
+    fig = make_subplots(rows=rows, cols=columns, specs=specs,
+                        subplot_titles=subplot_titles)
+
+    fig.add_trace(gen_table(data_time_lessons, header_table), 1, 1)
+
+    fig.add_trace(generate_bar_lessons_time(data_time_bar_pie, False), 1, 2)
+
+    fig.add_trace(generate_pie_lessons_time(data_time_bar_pie), 1, 3)
+
+    fig = go.Figure(fig)
+    fig['layout']['xaxis']['title'] = 'Lesson'
+    fig['layout']['yaxis']['title'] = 'Time (s)'
+    fig.update_layout(
+        title={'text': ' <b> Time Measurement <br> <b>',
+               'font': {
+                   'family': "Arial",
+                   'size': 20,
+                   'color': '#000000'
+               }},
+        title_x=0.5,
+        legend_title="Activities",
+    )
+    return fig
+
+

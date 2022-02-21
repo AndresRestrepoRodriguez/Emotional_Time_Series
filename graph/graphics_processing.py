@@ -130,3 +130,36 @@ def get_metric_all_lessons_consolidate(df_consolidate_time_series, metrics):
     return metric_lessons_unified
 
 
+def get_metric_all_lessons_activity(df_consolidate_time_series, metric):
+    array_metrics_data = []
+    for lesson in df_consolidate_time_series.keys():
+        filter_df_lesson = df_consolidate_time_series[lesson]
+        for activity_lesson in filter_df_lesson:
+            array_metrics_data.append(activity_lesson[metric])
+    return np.concatenate(array_metrics_data).tolist()
+
+
+def get_metric_all_lessons_activity_consolidate(df_consolidate_time_series, metrics):
+    metric_lessons_unified = {}
+    for metric in metrics:
+        metric_lessons_unified[metric] = get_metric_all_lessons_activity(df_consolidate_time_series, metric)
+    return metric_lessons_unified
+
+
+def get_total_time_lessons_activity(filter_participant_lesson_time_result):
+    time_general_lessons_activity = []
+    for key_lesson in filter_participant_lesson_time_result.keys():
+        lesson_time_general_tmp = [key_lesson, filter_participant_lesson_time_result[key_lesson]]
+        time_general_lessons_activity.append(lesson_time_general_tmp)
+    return time_general_lessons_activity
+
+
+def get_results_lessons_activity(data_json_consolidate):
+    array_data = []
+    for key_lesson in data_json_consolidate.keys():
+        filter_data = data_json_consolidate[key_lesson]
+        results = list(filter_data.values())
+        temp_data = [key_lesson] + results
+        array_data.append(temp_data)
+    return array_data
+
