@@ -156,7 +156,7 @@ def generate_analysis_participant_lessons_activity(root_path_data, id_participan
         consolidate_metrics_lessons_unified, colors_metrics, metrics)
     histograms_overlayed_row = plotting_tool.generate_row_histogram_metrics_lessons_activity_overlay(
         participant_activity_lessons_data_ts_processed_reset, colors_lessons, metrics)
-    heatmaps_row = plotting_tool.generate_heatmap_row_lessons_overlay(
+    heatmaps_row = plotting_tool.generate_heatmap_row_lesson_activity_overlay(
         participant_activity_lessons_data_ts_processed_reset, metrics)
     time_row = plotting_tool.generate_row_time_participant_lessons_activity(time_lesson_activity,
                                                                             time_lesson_activity_bar_pie)

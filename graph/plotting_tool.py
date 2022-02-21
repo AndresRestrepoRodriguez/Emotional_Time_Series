@@ -682,7 +682,7 @@ def generate_row_histogram_metrics_lessons_activity_overlay(df_consolidate_time_
     return fig
 
 
-def generate_heatmap_row_lessons_overlay(df_consolidate_time_series, metrics):
+def generate_heatmap_row_lesson_activity_overlay(df_consolidate_time_series, metrics):
     subtitles_array = []
     rows = 1
     columns = len(metrics) // 2
@@ -699,11 +699,11 @@ def generate_heatmap_row_lessons_overlay(df_consolidate_time_series, metrics):
             pos_metric = ((row - 1) * columns) + (col - 1)
             metric = metrics[pos_metric]
             for lesson in df_consolidate_time_series:
-              activities_consolidate = df_consolidate_time_series[lesson]
-              for activity in activities_consolidate:
-                x_value_time = activity.index
-                y_value_metric = activity[metric].values
-                fig.append_trace(generate_heatmap_time_series(x_value_time, y_value_metric), row, col)
+                activities_consolidate = df_consolidate_time_series[lesson]
+                for activity in activities_consolidate:
+                    x_value_time = activity.index
+                    y_value_metric = activity[metric].values
+                    fig.append_trace(generate_heatmap_time_series(x_value_time, y_value_metric), row, col)
     fig = go.Figure(fig)
     fig.update_layout(
         title={'text': ' <b> Heatmap Performance Metrics <br> <b>',
@@ -749,5 +749,3 @@ def generate_row_time_participant_lessons_activity(data_time_lessons, data_time_
         legend_title="Activities",
     )
     return fig
-
-
