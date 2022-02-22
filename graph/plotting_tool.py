@@ -226,7 +226,8 @@ def generate_row_results(data_time_activity, data_time_bar_pie, data_result_bar,
                }},
         title_x=0.5,
         title_y=0.97,
-        legend_title="Answers"
+        legend_title="Answers",
+        legend_itemclick=False
     )
     return fig
 
