@@ -183,3 +183,62 @@ def filter_participant_lesson_results(dict_participant_results_time, activity_in
     return filter_dict_lesson
 
 
+def get_participant_lessons_subactivity(participant_lessons_data_ts, activity, sub_activity):
+    dict_lessons_activity = {}
+    generate_activity_subactivity = f"{activity}-{sub_activity}"
+    for key_lesson in participant_lessons_data_ts.keys():
+        tmp_array_lesson = []
+        df_ts_filter = participant_lessons_data_ts[key_lesson]
+        activities = process_activities(df_ts_filter)
+        activity_filter_tmp = [activity_info for activity_info in activities
+                               if generate_activity_subactivity in activity_info[0]]
+        for activity_filter in activity_filter_tmp:
+            start_date = datetime.datetime.strptime(activity_filter[1], DATE_FORMAT_TS)
+            end_date = datetime.datetime.strptime(activity_filter[2], DATE_FORMAT_TS)
+            mask = (df_ts_filter['time_value'] > start_date.strftime(DATE_FORMAT_TS)) & \
+                   (df_ts_filter['time_value'] <= (end_date - datetime.timedelta(seconds=1)).strftime(DATE_FORMAT_TS))
+            filter_data_ts = df_ts_filter.loc[mask]
+            tmp_array_lesson.append(filter_data_ts)
+        if tmp_array_lesson:
+            dict_lessons_activity[key_lesson] = tmp_array_lesson
+    return dict_lessons_activity
+
+
+def filter_participant_lesson_subactivity_time_result(dict_participant_results_time, activity_info, sub_activity):
+    generate_activity_subactivity = f"{activity_info}-{sub_activity}"
+    filter_dict_lesson = {}
+    for key_lesson in dict_participant_results_time.keys():
+        list_keys_tmp = dict_participant_results_time[key_lesson].keys()
+        filter_keys = [key for key in list_keys_tmp if generate_activity_subactivity in key]
+        acum_time = 0
+        if filter_keys:
+            for filter in filter_keys:
+                acum_time += dict_participant_results_time[key_lesson][filter]['time']
+            filter_dict_lesson[key_lesson] = acum_time
+    return filter_dict_lesson
+
+
+def filter_participant_lesson_subactivity_results(dict_participant_results_time, activity_info, sub_activity):
+    generate_activity_subactivity = f"{activity_info}-{sub_activity}"
+    filter_dict_lesson = {}
+    for key_lesson in dict_participant_results_time.keys():
+        list_keys_tmp = dict_participant_results_time[key_lesson].keys()
+        filter_keys = [key for key in list_keys_tmp if generate_activity_subactivity in key]
+        correct_acumulate = 0
+        incorrect_acumulate = 0
+        total_acumulate = 0
+        attemps_acumulate = 0
+        if filter_keys:
+            for filter in filter_keys:
+                correct_acumulate += dict_participant_results_time[key_lesson][filter]['results']['correct']
+                incorrect_acumulate += dict_participant_results_time[key_lesson][filter]['results']['incorrect']
+                total_acumulate += dict_participant_results_time[key_lesson][filter]['results']['total_questions']
+                attemps_acumulate += dict_participant_results_time[key_lesson][filter]['results']['errors']
+            tmp_dict_results = {
+                'total_questions': total_acumulate,
+                'correct': correct_acumulate,
+                'incorrect': incorrect_acumulate,
+                'errors': attemps_acumulate,
+            }
+            filter_dict_lesson[key_lesson] = tmp_dict_results
+    return filter_dict_lesson

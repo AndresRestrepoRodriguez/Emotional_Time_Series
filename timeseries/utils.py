@@ -29,3 +29,8 @@ def generate_title_complement_user_lessons(id_user, ids_lessons):
 def generate_title_complement_user_activity(id_user, ids_lessons, activity):
     lessons_string = ", ".join(str(id) for id in ids_lessons)
     return f"User: {id_user} - Lessons: {lessons_string} - Activity: {activity} <br> <b>"
+
+
+def generate_title_complement_user_subactivity(id_user, ids_lessons, activity, sub_activity):
+    lessons_string = ", ".join(str(id) for id in ids_lessons)
+    return f"User: {id_user} - Lessons: {lessons_string} - Activity: {activity} - Sub Activity: {sub_activity} <br> <b>"
