@@ -106,7 +106,7 @@ def generate_bar_grouped_activity_results(data_results_activities, legend_show=T
     for value_name in data_results_activities['name_values']:
         trace = go.Bar(x=data_results_activities['x_values'],
                        y=data_results_activities['y_values'][count], marker_color=colors[count],
-                       showlegend=legend_show)
+                       showlegend=legend_show, legendgroup=value_name)
         data_traces.append(trace)
         count += 1
     return data_traces
@@ -115,7 +115,7 @@ def generate_bar_grouped_activity_results(data_results_activities, legend_show=T
 def generate_pie_activity_result(data_result_activity, legend_show=True):
     colors = ['#EF553B', '#00CC96', '#636EFA', '#FFA15A']
     return go.Pie(values=data_result_activity["y_values"], labels=data_result_activity["x_values"],
-                  showlegend=legend_show, marker=dict(colors=colors))
+                  showlegend=legend_show, marker=dict(colors=colors), legendgroup=data_result_activity["x_values"])
 
 
 def generate_heatmap_time_series(x_values, y_values):
