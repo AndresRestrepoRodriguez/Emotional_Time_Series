@@ -67,7 +67,7 @@ def generate_time_series_plot(activities_info, dataframe_ts, metrics, colors_met
                }},
         title_x=0.5,
         title_y=0.97,
-        xaxis_title="Time",
+        xaxis_title="Time (s)",
         yaxis_title="Performance Metrics Value",
         legend_title="Metrics")
     fig.update_xaxes(
@@ -151,10 +151,7 @@ def generate_row_histogram_metrics(dataframe_ts, colors_metrics, metrics, comple
                }},
         title_x=0.5,
         title_y=0.97,
-        legend_title="Metrics",
-        xaxis=dict(
-            title="Values"
-        )
+        legend_title="Metrics"
     )
     return fig
 
@@ -229,6 +226,7 @@ def generate_row_results(data_time_activity, data_time_bar_pie, data_result_bar,
                }},
         title_x=0.5,
         title_y=0.97,
+        legend_title="Answers"
     )
     return fig
 
@@ -264,6 +262,9 @@ def generate_heatmap_row(dataframe_ts, metrics, complementary_title):
         title_y=0.97,
         coloraxis={'colorscale': [(0, "white"), (0.5, "red"), (1, "blue")]}
     )
+    fig.update_xaxes(
+        tickformat="%H:%M:%S"
+    )
     return fig
 
 
@@ -297,7 +298,9 @@ def generate_time_series_partipant_metrics(dataframes_ts_lessons, metrics, df_ti
     rows = 3
     columns = 2
     fig = make_subplots(rows=rows, cols=columns,
-                        subplot_titles=subplot_titles)
+                        subplot_titles=subplot_titles,
+                        x_title='Time (s)',
+                        y_title='Performance Metric Value')
 
     for row in range(1, rows + 1):
         for column in range(1, columns + 1):
@@ -346,7 +349,7 @@ def generate_pie_lesson_results(data_result_lessons, legend_show=True):
                   showlegend=legend_show, marker=dict(colors=colors))
 
 
-def generate_row_results_participant_lessons(data_time_activity, data_time_bar_pie, data_result_bar):
+def generate_row_results_participant_lessons(data_time_activity, data_time_bar_pie, data_result_bar, complementary_title):
     # data_time_activity = generate_data_result_activity(json_data)
     # data_time_bar_pie = generate_data_result_general(data_time_activity)
     # data_result_bar = generate_data_results_activity_bar_grouped(data_time_activity)
@@ -372,13 +375,16 @@ def generate_row_results_participant_lessons(data_time_activity, data_time_bar_p
     layout = go.Layout(barmode='group', )
     fig = go.Figure(fig, layout=layout)
     fig.update_layout(
-        title={'text': ' <b> Results <br> <b>',
+        title={'text': f' <b> Questions Results <br>'
+                       f'{complementary_title}',
                'font': {
                    'family': "Arial",
                    'size': 19,
                    'color': '#000000'
                }},
         title_x=0.5,
+        title_y=0.97,
+        legend_title="Answers"
     )
     return fig
 
@@ -457,10 +463,7 @@ def generate_row_histogram_metrics_lessons_unified(consolidate_metrics_lessons_u
                }},
         title_x=0.5,
         title_y=0.97,
-        legend_title="Metrics",
-        xaxis=dict(
-            title="Values"
-        )
+        legend_title="Metrics"
     )
     return fig
 
@@ -505,10 +508,7 @@ def generate_row_histogram_metrics_lessons_overlay(df_consolidate_time_series, c
                }},
         title_x=0.5,
         title_y=0.97,
-        legend_title="Metrics",
-        xaxis=dict(
-            title="Values"
-        )
+        legend_title="Lessons"
     )
     # Overlay both histograms
     fig.update_layout(barmode='overlay')
@@ -549,6 +549,9 @@ def generate_heatmap_row_lessons_overlay(df_consolidate_time_series, metrics, co
         title_x=0.5,
         title_y=0.97,
         coloraxis={'colorscale': [(0, "white"), (0.5, "red"), (1, "blue")]}
+    )
+    fig.update_xaxes(
+        tickformat="%H:%M:%S"
     )
     return fig
 
@@ -591,7 +594,10 @@ def generate_time_series_partipant_lesson_activity_metrics(dataframes_ts_lessons
     rows = 3
     columns = 2
     fig = make_subplots(rows=rows, cols=columns,
-                        subplot_titles=subplot_titles)
+                        subplot_titles=subplot_titles,
+                        x_title='Time (s)',
+                        y_title='Performance Metric Value'
+                        )
 
     for row in range(1, rows + 1):
         for column in range(1, columns + 1):
@@ -612,6 +618,9 @@ def generate_time_series_partipant_lesson_activity_metrics(dataframes_ts_lessons
         title_x=0.5,
         title_y=0.97,
         legend_title="Lessons"
+    )
+    fig.update_xaxes(
+        tickformat="%H:%M:%S"
     )
     return fig
 
@@ -643,10 +652,7 @@ def generate_row_histogram_metrics_lessons_activity_unified(consolidate_metrics_
                }},
         title_x=0.5,
         title_y=0.97,
-        legend_title="Metrics",
-        xaxis=dict(
-            title="Values"
-        )
+        legend_title="Metrics"
     )
     return fig
 
@@ -701,10 +707,7 @@ def generate_row_histogram_metrics_lessons_activity_overlay(df_consolidate_time_
                }},
         title_x=0.5,
         title_y=0.97,
-        legend_title="Metrics",
-        xaxis=dict(
-            title="Values"
-        )
+        legend_title="Lessons"
     )
     # Overlay both histograms
     fig.update_layout(barmode='overlay')
@@ -746,6 +749,9 @@ def generate_heatmap_row_lesson_activity_overlay(df_consolidate_time_series, met
         title_y=0.97,
         coloraxis={'colorscale': [(0, "white"), (0.5, "red"), (1, "blue")]}
     )
+    fig.update_xaxes(
+        tickformat="%H:%M:%S"
+    )
     return fig
 
 
@@ -780,5 +786,46 @@ def generate_row_time_participant_lessons_activity(data_time_lessons, data_time_
         title_x=0.5,
         title_y=0.97,
         legend_title="Activities",
+    )
+    return fig
+
+
+def generate_row_results_participant_lesson_activity(data_time_activity, data_time_bar_pie, data_result_bar,
+                                                     complementary_title):
+    # data_time_activity = generate_data_result_activity(json_data)
+    # data_time_bar_pie = generate_data_result_general(data_time_activity)
+    # data_result_bar = generate_data_results_activity_bar_grouped(data_time_activity)
+    rows = 1
+    columns = 3
+    subplot_titles = ("Results by Lesson", "Results by Lesson Bar plot", "General Results Porcentage Lessons")
+    header_table = ["Activity", "Total Questions", "Correct", "Incorrect", "Errors / Attempts"]
+    specs = [[{'type': 'domain'}, {'type': 'bar'}, {'type': 'pie'}]]
+    fig = make_subplots(rows=rows, cols=columns, specs=specs,
+                        subplot_titles=subplot_titles)
+
+    colors = ['red', 'green', 'blue', 'yellow']
+
+    fig.add_trace(gen_table(data_time_activity, header_table), 1, 1)
+
+    # fig.add_trace(generate_pie_activity_result(data_time_bar_pie), 1, 2)
+    for bar_plot in generate_bar_grouped_lessons_results(data_result_bar, False):
+        fig.append_trace(bar_plot, 1, 2)
+
+    fig.add_trace(generate_pie_lesson_results(data_time_bar_pie), 1, 3)
+    fig['layout']['xaxis']['title'] = 'Activity'
+    fig['layout']['yaxis']['title'] = 'Answers'
+    layout = go.Layout(barmode='group', )
+    fig = go.Figure(fig, layout=layout)
+    fig.update_layout(
+        title={'text': f' <b> Questions Results <br>'
+                       f'{complementary_title}',
+               'font': {
+                   'family': "Arial",
+                   'size': 19,
+                   'color': '#000000'
+               }},
+        title_x=0.5,
+        title_y=0.97,
+        legend_title="Answers"
     )
     return fig

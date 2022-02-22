@@ -121,10 +121,10 @@ def generate_analysis_participant_lessons(root_path_data, id_participant, ids_le
     time_row = plotting_tool.generate_row_time_participant_lessons(time_general_lessons, time_lessons_bar,
                                                                    complementary_title)
 
-    results_row = plotting_tool.generate_row_results(results_processed_lessons_general,
-                                                     data_results_general_lesson_pie,
-                                                     data_results_lessons_bar_grouped,
-                                                     complementary_title)
+    results_row = plotting_tool.generate_row_results_participant_lessons(results_processed_lessons_general,
+                                                                         data_results_general_lesson_pie,
+                                                                         data_results_lessons_bar_grouped,
+                                                                         complementary_title)
 
     rows_graphics_array = [time_series_group_row, histograms_unified_row, histograms_overlayed_row,
                            heatmaps_row, time_row, results_row]
@@ -187,10 +187,11 @@ def generate_analysis_participant_lessons_activity(root_path_data, id_participan
                                                                                      time_lesson_activity_bar_pie,
                                                                                      complementary_title)
 
-    results_activity_row = plotting_tool.generate_row_results(participant_lesson_activity_results,
-                                                              participant_lesson_activity_results_pie,
-                                                              participant_lesson_activity_results_bar,
-                                                              complementary_title)
+    results_activity_row = plotting_tool.generate_row_results_participant_lesson_activity(
+        participant_lesson_activity_results,
+        participant_lesson_activity_results_pie,
+        participant_lesson_activity_results_bar,
+        complementary_title)
 
     rows_graphics_array = [time_series_group_activity_row,
                            histograms_unified_activity_row,
