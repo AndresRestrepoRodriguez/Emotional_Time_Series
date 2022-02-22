@@ -187,6 +187,7 @@ def generate_row_time(data_time_activity, data_time_bar_pie, complementary_title
         title_x=0.5,
         title_y=0.97,
         legend_title="Activities",
+        legend_itemclick=False
     )
     return fig
 
@@ -385,7 +386,8 @@ def generate_row_results_participant_lessons(data_time_activity, data_time_bar_p
                }},
         title_x=0.5,
         title_y=0.97,
-        legend_title="Answers"
+        legend_title="Answers",
+        legend_itemclick=False
     )
     return fig
 
@@ -429,6 +431,7 @@ def generate_row_time_participant_lessons(data_time_lessons, data_time_bar_pie, 
         title_x=0.5,
         title_y=0.97,
         legend_title="Activities",
+        legend_itemclick=False
     )
     return fig
 
@@ -787,6 +790,7 @@ def generate_row_time_participant_lessons_activity(data_time_lessons, data_time_
         title_x=0.5,
         title_y=0.97,
         legend_title="Activities",
+        legend_itemclick=False
     )
     return fig
 
@@ -827,6 +831,7 @@ def generate_row_results_participant_lesson_activity(data_time_activity, data_ti
                }},
         title_x=0.5,
         title_y=0.97,
-        legend_title="Answers"
+        legend_title="Answers",
+        legend_itemclick=False
     )
     return fig
