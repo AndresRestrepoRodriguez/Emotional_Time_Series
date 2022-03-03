@@ -363,9 +363,18 @@ def generate_analysis_group_lessons(root_path_data, ids_group, id_lessons):
     data_results_group_lessons_bar_grouped = graphics_processing.generate_data_results_lessons_bar_grouped(
         results_processed_group_lessons_general)
 
+    data_overlay_distribution_lessons = graphics_processing.generate_distribution_group_lessons(
+        group_lessons_data_ts_processed)
+
     histogram_group_lessons_row = plotting_tool.generate_row_histogram_metrics_lessons_unified(
         consolidate_metrics_group_unified,
         colors_metrics,
+        metrics,
+        complementary_title)
+
+    histograms_overlayed_row = plotting_tool.generate_row_histogram_metrics_lessons_overlay(
+        data_overlay_distribution_lessons,
+        colors_lessons,
         metrics,
         complementary_title)
 
@@ -380,6 +389,7 @@ def generate_analysis_group_lessons(root_path_data, ids_group, id_lessons):
         complementary_title)
 
     rows_graphics_array = [histogram_group_lessons_row,
+                           histograms_overlayed_row,
                            time_group_lessons_row,
                            results_group_lessons_row]
 

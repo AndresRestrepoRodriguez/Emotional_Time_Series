@@ -1,6 +1,7 @@
 import numpy as np
 from collections import Counter
 import collections, functools, operator
+import pandas as pd
 
 
 def generate_data_time_activity(json_data):
@@ -276,3 +277,19 @@ def get_general_results_group_lessons(data_json_consolidate):
         temp_data = [key_lesson] + results
         array_data.append(temp_data)
     return array_data
+
+
+def generate_distribution_group_lessons(ts_processed):
+    dict_lesson_distribution = {}
+    for key_id in ts_processed.keys():
+        data_id_filter = ts_processed[key_id]
+        for id_lesson in data_id_filter.keys():
+            if not id_lesson in dict_lesson_distribution.keys():
+                dict_lesson_distribution[id_lesson] = []
+            data_id_lesson = data_id_filter[id_lesson]
+            dict_lesson_distribution[id_lesson].append(data_id_lesson)
+
+    for key_lesson in dict_lesson_distribution.keys():
+        dict_lesson_distribution[key_lesson] = pd.concat(dict_lesson_distribution[key_lesson], axis=0)
+
+    return dict_lesson_distribution
