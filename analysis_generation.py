@@ -283,7 +283,7 @@ def generate_analysis_participant_lessons_subactivity(root_path_data, id_partici
         print("\n\n")
 
 
-def generate_analysis_participant_lessons_subactivity(root_path_data, ids_group, id_lesson):
+def generate_analysis_group_lesson(root_path_data, ids_group, id_lesson):
     group_lesson_data_ts = load_data.load_group_lesson_consolidate(root_path_data, ids_group, id_lesson)
     group_lesson_data_ts_processed = processing_ts.process_datatime_group_lesson(group_lesson_data_ts)
     group_lesson_time_results = load_data.load_results_group_lesson(root_path_data, ids_group, id_lesson)
