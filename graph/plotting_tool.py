@@ -351,7 +351,8 @@ def generate_pie_lesson_results(data_result_lessons, legend_show=True):
                   showlegend=legend_show, marker=dict(colors=colors))
 
 
-def generate_row_results_participant_lessons(data_time_activity, data_time_bar_pie, data_result_bar, complementary_title):
+def generate_row_results_participant_lessons(data_time_activity, data_time_bar_pie, data_result_bar,
+                                             complementary_title):
     # data_time_activity = generate_data_result_activity(json_data)
     # data_time_bar_pie = generate_data_result_general(data_time_activity)
     # data_result_bar = generate_data_results_activity_bar_grouped(data_time_activity)
@@ -572,7 +573,8 @@ def generate_time_series_participant_metric_activity(dataframes_ts_lessons, metr
                 showlegend_value = True if count_activity == 0 else False
             data_ts = data_activity_df
             traces.append(go.Scatter(x=data_ts.index, y=data_ts[metric], name=key_lesson, legendgroup=key_lesson,
-                                     line={'color': colors_lessons[key_lesson]}, mode="lines", showlegend=showlegend_value))
+                                     line={'color': colors_lessons[key_lesson]}, mode="lines",
+                                     showlegend=showlegend_value))
             count_activity += 1
     return traces
 
@@ -835,3 +837,103 @@ def generate_row_results_participant_lesson_activity(data_time_activity, data_ti
         legend_itemclick=False
     )
     return fig
+
+
+def generate_time_series_group_lesson_metric(dataframes_ts_lessons, metric, colors_users, showlegend):
+    traces = []
+    for key_id in dataframes_ts_lessons:
+        id_user_filter = dataframes_ts_lessons[key_id]
+        for key_lesson in id_user_filter:
+            data_ts = id_user_filter[key_lesson]
+            traces.append(go.Scatter(x=data_ts.index, y=data_ts[metric], name=key_id, legendgroup=key_id,
+                                     line={'color': colors_users[key_id]}, showlegend=showlegend))
+    return traces
+
+
+def generate_time_series_group_lesson_metrics(dataframes_ts_group_lessons, metrics, df_time_series_long_xaxis,
+                                              colors_users, complementary_title):
+    # df_time_series_long_xaxis = dataframes_ts_lessons[get_most_long_time_series(df_consolidate)]
+
+    subtitles_array = []
+    for metric in metrics:
+        subtitles_array.append(f"Time serie {metric}")
+    subplot_titles = tuple(subtitles_array)
+
+    count_metric = 0
+    dict_traces_metrics = {}
+    for metric in metrics:
+        showlegend_value = True if count_metric == 0 else False
+        dict_traces_metrics[metric] = generate_time_series_group_lesson_metric(dataframes_ts_group_lessons,
+                                                                               metric, colors_users,
+                                                                               showlegend_value)
+        count_metric += 1
+
+    rows = 3
+    columns = 2
+    fig = make_subplots(rows=rows, cols=columns,
+                        subplot_titles=subplot_titles,
+                        x_title='Time (s)',
+                        y_title='Performance Metric Value')
+
+    for row in range(1, rows + 1):
+        for column in range(1, columns + 1):
+            pos_metric = ((row - 1) * columns) + (column - 1)
+            metrics_val = metrics[pos_metric]
+            traces = dict_traces_metrics[metrics_val]
+            for trace in traces:
+                fig.append_trace(trace, row, column)
+
+    fig.update_layout(
+        title={'text': f' <b> Performance Metric Recording Pool <br>'
+                       f'{complementary_title}',
+               'font': {
+                   'family': "Arial",
+                   'size': 19,
+                   'color': '#000000'
+               }},
+        title_x=0.5,
+        title_y=0.97,
+        legend_title="Lessons"
+    )
+    fig.update_xaxes(
+        tickformat="%H:%M:%S",
+        range=[df_time_series_long_xaxis.index[0] - datetime.timedelta(seconds=5),
+               df_time_series_long_xaxis.index[-1] + datetime.timedelta(seconds=5)])
+
+    return fig
+
+
+def generate_row_time_group_lesson(data_time_activity, data_time_bar_pie, complementary_title):
+    rows = 1
+    columns = 3
+    subplot_titles = ("Time by Activity", "Time by Activity Bar plot", "Time Porcentage by Activity")
+    header_table = ["Activity", "Time"]
+    specs = [[{'type': 'domain'}, {'type': 'bar'}, {'type': 'pie'}]]
+    fig = make_subplots(rows=rows, cols=columns, specs=specs,
+                        subplot_titles=subplot_titles)
+
+    fig.add_trace(gen_table(data_time_activity, header_table), 1, 1)
+
+    fig.add_trace(generate_bar_activity_time(data_time_bar_pie, False), 1, 2)
+
+    fig.add_trace(generate_pie_activity_time(data_time_bar_pie), 1, 3)
+
+    fig = go.Figure(fig)
+    fig['layout']['xaxis']['title'] = 'Activity'
+    fig['layout']['yaxis']['title'] = 'Time (s)'
+    fig.update_layout(
+        title={'text': f' <b> Time Measurement <br>'
+                       f'{complementary_title}',
+               'font': {
+                   'family': "Arial",
+                   'size': 19,
+                   'color': '#000000'
+               }},
+        title_x=0.5,
+        title_y=0.97,
+        legend_title="Activities",
+        legend_itemclick=False
+    )
+    return fig
+
+

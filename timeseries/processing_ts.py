@@ -242,3 +242,33 @@ def filter_participant_lesson_subactivity_results(dict_participant_results_time,
             }
             filter_dict_lesson[key_lesson] = tmp_dict_results
     return filter_dict_lesson
+
+
+def process_datatime_group_lesson(group_lesson_data_ts):
+    dict_group_lesson_processed = {}
+    for key_id in group_lesson_data_ts.keys():
+        group_lesson_filter = group_lesson_data_ts[key_id]
+        for key_lesson in group_lesson_filter.keys():
+            dict_group_lesson_processed[key_id] = {
+                key_lesson: process_datetime(group_lesson_filter[key_lesson])}
+    return dict_group_lesson_processed
+
+
+def get_most_long_time_series_group(dataframes_ts_group_lesson):
+    sizes_time_series = {}
+    size_time_series_user = {}
+    max_lesson_user = {}
+    for key_id in dataframes_ts_group_lesson.keys():
+        filter_data_ts_user = dataframes_ts_group_lesson[key_id]
+        sizes_time_series[key_id] = {}
+        for key_lesson in filter_data_ts_user:
+            data_ts_len = len(filter_data_ts_user[key_lesson])
+            sizes_time_series[key_id][key_lesson] = data_ts_len
+        max_len_intra_user = max(zip(sizes_time_series[key_id].values(), sizes_time_series[key_id].keys()))
+        len_max_intra_user = max_len_intra_user[0]
+        lesson_max_intra_user = max_len_intra_user[1]
+        max_lesson_user[key_id] = lesson_max_intra_user
+        size_time_series_user[key_id] = len_max_intra_user
+    user_id = max(zip(size_time_series_user.values(), size_time_series_user.keys()))[1]
+    lesson_user_id = max_lesson_user[key_id]
+    return user_id, lesson_user_id

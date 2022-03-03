@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import json
+import random
 
 
 def np_encoder(object):
@@ -34,3 +35,19 @@ def generate_title_complement_user_activity(id_user, ids_lessons, activity):
 def generate_title_complement_user_subactivity(id_user, ids_lessons, activity, sub_activity):
     lessons_string = ", ".join(str(id) for id in ids_lessons)
     return f"User: {id_user} - Lessons: {lessons_string} - Activity: {activity} - Sub Activity: {sub_activity} <br> <b>"
+
+
+def generate_title_complement_group_lesson(id_lesson):
+    return f"Group - Lesson: {id_lesson} <br> <b>"
+
+
+def generate_random_user_colors(users_ids):
+    chars = '0123456789ABCDEF'
+    user_str = "user_"
+    num_users = len(users_ids)
+    users_ids_str = [user_str + user for user in users_ids]
+    colors = ['#' + ''.join(random.sample(chars, 6)) for i in range(num_users)]
+    users_colors = dict(zip(users_ids_str, colors))
+    return users_colors
+
+

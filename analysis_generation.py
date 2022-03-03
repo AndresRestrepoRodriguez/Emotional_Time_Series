@@ -281,3 +281,59 @@ def generate_analysis_participant_lessons_subactivity(root_path_data, id_partici
     for row_graphic in rows_graphics_array:
         row_graphic.show()
         print("\n\n")
+
+
+def generate_analysis_participant_lessons_subactivity(root_path_data, ids_group, id_lesson):
+    group_lesson_data_ts = load_data.load_group_lesson_consolidate(root_path_data, ids_group, id_lesson)
+    group_lesson_data_ts_processed = processing_ts.process_datatime_group_lesson(group_lesson_data_ts)
+    group_lesson_time_results = load_data.load_results_group_lesson(root_path_data, ids_group, id_lesson)
+
+    users_colors = utils.generate_random_user_colors(ids_group)
+    user_id_max_ts_key, lesson_user_max_ts_key = processing_ts.get_most_long_time_series_group(
+        group_lesson_data_ts_processed)
+    most_long_time_serie_data_ts = group_lesson_data_ts_processed[user_id_max_ts_key][lesson_user_max_ts_key]
+    complementary_title = utils.generate_title_complement_group_lesson(id_lesson)
+
+    consolidate_metrics_group_unified = graphics_processing.get_metric_all_group_lessons_consolidate(
+        group_lesson_data_ts_processed, metrics)
+
+    summary_group_lesson_time = graphics_processing.get_summary_group_lessons_time(group_lesson_time_results)
+    grouped_group_lesson_results = graphics_processing.get_grouped_group_lessons_results(group_lesson_time_results)
+    summary_group_lesson_results = graphics_processing.get_summary_group_lessons_results(grouped_group_lesson_results)
+
+    group_data_time_lesson = graphics_processing.generate_group_data_time_lesson(summary_group_lesson_time, id_lesson)
+    group_data_time_lesson_pie_bar = graphics_processing.generate_group_data_time_lesson_bar(summary_group_lesson_time,
+                                                                                             id_lesson)
+
+    data_results_group_lesson = graphics_processing.generate_group_data_results_lesson(summary_group_lesson_results,
+                                                                                       id_lesson)
+    data_bar_results_group_lesson = graphics_processing.generate_data_results_activity_bar_grouped(
+        data_results_group_lesson)
+    data_pie_results_group_lesson = graphics_processing.generate_data_result_general(data_results_group_lesson)
+
+    time_series_group_lesson_row = plotting_tool.generate_time_series_group_lesson_metrics(
+        group_lesson_data_ts_processed, metrics,
+        most_long_time_serie_data_ts, users_colors,
+        complementary_title)
+    histogram_group_lesson_row = plotting_tool.generate_row_histogram_metrics_lessons_unified(
+        consolidate_metrics_group_unified,
+        colors_metrics,
+        metrics,
+        complementary_title)
+    time_group_lesson_row = plotting_tool.generate_row_time_group_lesson(group_data_time_lesson,
+                                                                         group_data_time_lesson_pie_bar,
+                                                                         complementary_title)
+
+    results_group_lesson_row = plotting_tool.generate_row_results(data_results_group_lesson,
+                                                                  data_pie_results_group_lesson,
+                                                                  data_bar_results_group_lesson,
+                                                                  complementary_title)
+
+    rows_graphics_array = [time_series_group_lesson_row,
+                           histogram_group_lesson_row,
+                           time_group_lesson_row,
+                           results_group_lesson_row]
+
+    for row_graphic in rows_graphics_array:
+        row_graphic.show()
+        print("\n\n")

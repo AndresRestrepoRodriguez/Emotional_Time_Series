@@ -44,3 +44,24 @@ def load_results_participant_lessons_consolidate(root_path, id_participant, id_l
         data_tmp = load_participant_lesson_time_results(root_path, id_participant, lesson)
         dict_lessons_results[lesson_str + lesson] = data_tmp
     return dict_lessons_results
+
+
+def load_group_lesson_consolidate(root_path, id_participants, id_lesson):
+    lesson_str = "lesson_"
+    user_str = "user_"
+    dict_group_lesson = {}
+    for id_participant in id_participants:
+        dict_group_lesson[user_str + id_participant] = {
+            lesson_str + id_lesson: load_participant_lesson_dataframe(root_path, id_participant, id_lesson)}
+    return dict_group_lesson
+
+
+def load_results_group_lesson(root_path, id_participants, id_lesson):
+    lesson_str = "lesson_"
+    user_str = "user_"
+    dict_group_lesson = {}
+    for id_participant in id_participants:
+        dict_group_lesson[user_str + id_participant] = {
+            lesson_str + id_lesson: load_participant_lesson_time_results(root_path, id_participant,
+                                                                                   id_lesson)}
+    return dict_group_lesson
