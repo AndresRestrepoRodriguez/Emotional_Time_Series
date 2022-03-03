@@ -266,3 +266,13 @@ def generate_group_data_results_lesson(summary_group_lesson_results, id_lesson):
         temp_data = [key_activity] + results
         array_results.append(temp_data)
     return array_results
+
+
+def get_general_results_group_lessons(data_json_consolidate):
+    array_data = []
+    for key_lesson in data_json_consolidate.keys():
+        filter_data = data_json_consolidate[key_lesson]['0-general']
+        results = list(filter_data.values())
+        temp_data = [key_lesson] + results
+        array_data.append(temp_data)
+    return array_data

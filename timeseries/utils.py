@@ -41,6 +41,11 @@ def generate_title_complement_group_lesson(id_lesson):
     return f"Group - Lesson: {id_lesson} <br> <b>"
 
 
+def generate_title_complement_group_lessons( ids_lessons):
+    lessons_string = ", ".join(str(id_lesson) for id_lesson in ids_lessons)
+    return f"Group - Lessons: {lessons_string} <br> <b>"
+
+
 def generate_random_user_colors(users_ids):
     chars = '0123456789ABCDEF'
     user_str = "user_"

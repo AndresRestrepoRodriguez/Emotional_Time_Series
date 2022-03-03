@@ -63,5 +63,29 @@ def load_results_group_lesson(root_path, id_participants, id_lesson):
     for id_participant in id_participants:
         dict_group_lesson[user_str + id_participant] = {
             lesson_str + id_lesson: load_participant_lesson_time_results(root_path, id_participant,
-                                                                                   id_lesson)}
+                                                                         id_lesson)}
+    return dict_group_lesson
+
+
+def load_group_lessons_consolidate(root_path, id_participants, id_lessons):
+    lesson_str = "lesson_"
+    user_str = "user_"
+    dict_group_lesson = {}
+    for id_participant in id_participants:
+        dict_group_lesson[user_str + id_participant] = {}
+        for id_lesson in id_lessons:
+            dict_group_lesson[user_str + id_participant][
+                lesson_str + id_lesson] = load_participant_lesson_dataframe(root_path, id_participant,
+                                                                                      id_lesson)
+    return dict_group_lesson
+
+
+def load_results_group_lessons(root_path, id_participants, id_lessons):
+    lesson_str = "lesson_"
+    user_str = "user_"
+    dict_group_lesson = {}
+    for id_participant in id_participants:
+        dict_group_lesson[user_str + id_participant] = {}
+        for id_lesson in id_lessons:
+            dict_group_lesson[user_str + id_participant][lesson_str + id_lesson] = load_data.load_participant_lesson_time_results(root_path, id_participant, id_lesson)
     return dict_group_lesson

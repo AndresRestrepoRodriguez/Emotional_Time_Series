@@ -337,3 +337,52 @@ def generate_analysis_group_lesson(root_path_data, ids_group, id_lesson):
     for row_graphic in rows_graphics_array:
         row_graphic.show()
         print("\n\n")
+
+
+def generate_analysis_group_lessons(root_path_data, ids_group, id_lessons):
+    group_lessons_data_ts = load_data.load_group_lessons_consolidate(root_path_data, ids_group, id_lessons)
+    group_lessons_data_ts_processed = processing_ts.process_datatime_group_lessons(group_lessons_data_ts)
+    group_lessons_time_results = load_data.load_results_group_lessons(root_path_data, ids_group, id_lessons)
+
+    summary_group_lessons_time = graphics_processing.get_summary_group_lessons_time(group_lessons_time_results)
+    grouped_group_lessons_results = graphics_processing.get_grouped_group_lessons_results(group_lessons_time_results)
+    summary_group_lessons_results = graphics_processing.get_summary_group_lessons_results(grouped_group_lessons_results)
+
+    complementary_title = utils.generate_title_complement_group_lessons(id_lessons)
+
+    consolidate_metrics_group_unified = graphics_processing.get_metric_all_group_lessons_consolidate(
+        group_lessons_data_ts_processed, metrics)
+
+    time_general_group_lessons = graphics_processing.get_general_time_lessons(summary_group_lessons_time)
+    time_group_lessons_bar = graphics_processing.generate_data_time_lessons_bar_pie(time_general_group_lessons)
+
+    results_processed_group_lessons_general = graphics_processing.get_general_results_group_lessons(
+        summary_group_lessons_results)
+    data_results_general_group_lesson_pie = graphics_processing.generate_data_results_general_lesson_pie(
+        results_processed_group_lessons_general)
+    data_results_group_lessons_bar_grouped = graphics_processing.generate_data_results_lessons_bar_grouped(
+        results_processed_group_lessons_general)
+
+    histogram_group_lessons_row = plotting_tool.generate_row_histogram_metrics_lessons_unified(
+        consolidate_metrics_group_unified,
+        colors_metrics,
+        metrics,
+        complementary_title)
+
+    time_group_lessons_row = plotting_tool.generate_row_time_participant_lessons(time_general_group_lessons,
+                                                                                 time_group_lessons_bar,
+                                                                                 complementary_title)
+
+    results_group_lessons_row = plotting_tool.generate_row_results_participant_lessons(
+        results_processed_group_lessons_general,
+        data_results_general_group_lesson_pie,
+        data_results_group_lessons_bar_grouped,
+        complementary_title)
+
+    rows_graphics_array = [histogram_group_lessons_row,
+                           time_group_lessons_row,
+                           results_group_lessons_row]
+
+    for row_graphic in rows_graphics_array:
+        row_graphic.show()
+        print("\n\n")

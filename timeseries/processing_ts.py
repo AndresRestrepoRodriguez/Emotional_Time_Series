@@ -272,3 +272,16 @@ def get_most_long_time_series_group(dataframes_ts_group_lesson):
     user_id = max(zip(size_time_series_user.values(), size_time_series_user.keys()))[1]
     lesson_user_id = max_lesson_user[key_id]
     return user_id, lesson_user_id
+
+
+def process_datatime_group_lessons(group_lesson_data_ts):
+    dict_group_lesson_processed = {}
+    for key_id in group_lesson_data_ts.keys():
+        group_lesson_filter = group_lesson_data_ts[key_id]
+        dict_group_lesson_processed[key_id] = {}
+        for key_lesson in group_lesson_filter.keys():
+            dict_group_lesson_processed[key_id][key_lesson] = process_datetime(
+                group_lesson_filter[key_lesson])
+    return dict_group_lesson_processed
+
+
