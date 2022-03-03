@@ -87,5 +87,6 @@ def load_results_group_lessons(root_path, id_participants, id_lessons):
     for id_participant in id_participants:
         dict_group_lesson[user_str + id_participant] = {}
         for id_lesson in id_lessons:
-            dict_group_lesson[user_str + id_participant][lesson_str + id_lesson] = load_data.load_participant_lesson_time_results(root_path, id_participant, id_lesson)
+            dict_group_lesson[user_str + id_participant][lesson_str + id_lesson] = \
+                load_participant_lesson_time_results(root_path, id_participant, id_lesson)
     return dict_group_lesson
