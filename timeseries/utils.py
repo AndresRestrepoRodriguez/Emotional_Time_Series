@@ -52,6 +52,11 @@ def generate_title_complement_group_activity(ids_lessons, activity):
     return f"Group - Lessons: {lessons_string} - Activity: {activity} <br> <b>"
 
 
+def generate_title_complement_group_subactivity(ids_lessons, activity, sub_activity):
+    lessons_string = ", ".join(str(id) for id in ids_lessons)
+    return f"Group - Lessons: {lessons_string} - Activity: {activity} - Sub Activity: {sub_activity} <br> <b>"
+
+
 def generate_random_user_colors(users_ids):
     chars = '0123456789ABCDEF'
     user_str = "user_"

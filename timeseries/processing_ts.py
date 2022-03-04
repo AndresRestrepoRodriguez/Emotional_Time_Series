@@ -317,3 +317,29 @@ def get_data_group_lessons_activity_results(group_lessons_time_results, activity
         tmp_time = filter_participant_lesson_results(data_filter_id, activity)
         array_data.append(tmp_time)
     return array_data
+
+
+def get_group_lessons_subactivity(group_lessons_ts, activity, sub_activity):
+    results = {}
+    for key_id in group_lessons_ts.keys():
+        tmp_result_key_id = get_participant_lessons_subactivity(group_lessons_ts[key_id], activity, sub_activity)
+        results[key_id] = tmp_result_key_id
+    return results
+
+
+def get_data_group_lessons_subactivity_time_results(group_lessons_time_results, activity, sub_activity):
+    array_data = []
+    for key_id in group_lessons_time_results.keys():
+        data_filter_id = group_lessons_time_results[key_id]
+        tmp_time = filter_participant_lesson_subactivity_time_result(data_filter_id, activity, sub_activity)
+        array_data.append(tmp_time)
+    return array_data
+
+
+def get_data_group_lessons_subactivity_results(group_lessons_time_results, activity, sub_activity):
+    array_data = []
+    for key_id in group_lessons_time_results.keys():
+        data_filter_id = group_lessons_time_results[key_id]
+        tmp_time = filter_participant_lesson_subactivity_results(data_filter_id, activity, sub_activity)
+        array_data.append(tmp_time)
+    return array_data

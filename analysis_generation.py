@@ -416,15 +416,8 @@ def generate_analysis_group_lessons_activity(root_path_data, ids_group, id_lesso
     data_group_lessons_activity_results = processing_ts.get_data_group_lessons_activity_results(
         group_lessons_time_results, activity_info)
 
-    print(data_group_lessons_activity_results)
-
     summary_group_lessons_activity_results = graphics_processing.get_summary_group_lessons_activity_results(
         data_group_lessons_activity_results)
-
-    print(summary_group_lessons_activity_results)
-
-
-
 
     metric_group_lessons_activity = graphics_processing.get_metric_group_lessons_activity(
         group_lessons_data_ts_processed, metrics)
@@ -469,3 +462,71 @@ def generate_analysis_group_lessons_activity(root_path_data, ids_group, id_lesso
         row_graphic.show()
         print("\n\n")
 
+
+def generate_analysis_group_lessons_subactivity(root_path_data, ids_group, id_lessons, activity_info,
+                                                sub_activity):
+    group_lessons_data_ts = load_data.load_group_lessons_consolidate(root_path_data, ids_group, id_lessons)
+    group_lessons_subactivity_data_ts = processing_ts.get_group_lessons_subactivity(group_lessons_data_ts,
+                                                                                    activity_info,
+                                                                                    sub_activity)
+    group_lessons_data_ts_processed = processing_ts.process_datatime_group_lessons_activity(
+        group_lessons_subactivity_data_ts)
+    group_lessons_time_results = load_data.load_results_group_lessons(root_path_data, ids_group, id_lessons)
+
+    complementary_title = utils.generate_title_complement_group_subactivity(id_lessons, activity_info, sub_activity)
+
+    data_group_lessons_time_results = processing_ts.get_data_group_lessons_subactivity_time_results(
+        group_lessons_time_results, activity_info, sub_activity)
+
+    summary_group_lesson_subactivity_time = graphics_processing.get_summary_group_lessons_time_results(
+        data_group_lessons_time_results)
+
+    data_group_lessons_subactivity_results = processing_ts.get_data_group_lessons_subactivity_results(
+        group_lessons_time_results, activity_info, sub_activity)
+
+    summary_group_lessons_subactivity_results = graphics_processing.get_summary_group_lessons_subactivity_results(
+        data_group_lessons_subactivity_results)
+
+    metric_group_lessons_subactivity = graphics_processing.get_metric_group_lessons_activity(
+        group_lessons_data_ts_processed, metrics)
+
+    consolidate_group_metrics_lessons_unified = utils.concat_list_by_key(metric_group_lessons_subactivity)
+
+    summary_group_lessons_subactivity_df_consolidate = \
+        graphics_processing.get_summary_group_lessons_activity_df_consolidate(group_lessons_data_ts_processed)
+
+    time_group_lessons_subactivity = graphics_processing.get_total_time_lessons_activity(
+        summary_group_lesson_subactivity_time)
+    time_group_lessons_subactivity_bar_pie = graphics_processing.generate_data_time_lessons_bar_pie(
+        time_group_lessons_subactivity)
+
+    group_lessons_subactivity_results = graphics_processing.get_results_lessons_activity(
+        summary_group_lessons_subactivity_results)
+    group_lessons_subactivity_results_pie = graphics_processing.generate_data_results_general_lesson_pie(
+        group_lessons_subactivity_results)
+    group_lessons_subactivity_results_bar = graphics_processing.generate_data_results_lessons_bar_grouped(
+        group_lessons_subactivity_results)
+
+    histograms_unified_subactivity_row = plotting_tool.generate_row_histogram_metrics_lessons_activity_unified(
+        consolidate_group_metrics_lessons_unified, colors_metrics, metrics, complementary_title)
+
+    histograms_overlayed_subactivity_row = plotting_tool.generate_row_histogram_metrics_lessons_activity_overlay(
+        summary_group_lessons_subactivity_df_consolidate, colors_lessons, metrics, complementary_title)
+    time_subactivity_row = plotting_tool.generate_row_time_participant_lessons_activity(time_group_lessons_subactivity,
+                                                                                     time_group_lessons_subactivity_bar_pie,
+                                                                                     complementary_title)
+
+    results_subactivity_row = plotting_tool.generate_row_results_participant_lesson_activity(
+        group_lessons_subactivity_results,
+        group_lessons_subactivity_results_pie,
+        group_lessons_subactivity_results_bar,
+        complementary_title)
+
+    rows_graphics_array = [histograms_unified_subactivity_row,
+                           histograms_overlayed_subactivity_row,
+                           time_subactivity_row,
+                           results_subactivity_row]
+
+    for row_graphic in rows_graphics_array:
+        row_graphic.show()
+        print("\n\n")

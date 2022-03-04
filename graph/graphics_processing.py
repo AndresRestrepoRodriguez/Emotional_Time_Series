@@ -342,3 +342,14 @@ def get_summary_group_lessons_activity_df_consolidate(group_lessons_data_ts_proc
         results[key_lesson] = array
 
     return results
+
+
+def get_summary_group_lessons_subactivity_results(data_group_lessons_subactivity_results):
+    results = {}
+    keys_values = data_group_lessons_subactivity_results[0].keys()
+    for key_value in keys_values:
+        tmp_array_lesson = []
+        for value in data_group_lessons_subactivity_results:
+            tmp_array_lesson.append(value[key_value])
+        results[key_value] = get_sum_array_dicts(tmp_array_lesson)
+    return results
