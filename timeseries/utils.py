@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import json
 import random
+from collections import defaultdict
 
 
 def np_encoder(object):
@@ -46,6 +47,11 @@ def generate_title_complement_group_lessons( ids_lessons):
     return f"Group - Lessons: {lessons_string} <br> <b>"
 
 
+def generate_title_complement_group_activity(ids_lessons, activity):
+    lessons_string = ", ".join(str(id) for id in ids_lessons)
+    return f"Group - Lessons: {lessons_string} - Activity: {activity} <br> <b>"
+
+
 def generate_random_user_colors(users_ids):
     chars = '0123456789ABCDEF'
     user_str = "user_"
@@ -56,3 +62,12 @@ def generate_random_user_colors(users_ids):
     return users_colors
 
 
+def concat_list_by_key(list_dict):
+    result = defaultdict(list)
+
+    for i in range(len(list_dict)):
+        current = list_dict[i]
+        for key, value in current.items():
+            for j in range(len(value)):
+                result[key].append(value[j])
+    return result

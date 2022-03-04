@@ -937,3 +937,5 @@ def generate_row_time_group_lesson(data_time_activity, data_time_bar_pie, comple
     return fig
 
 
+
+

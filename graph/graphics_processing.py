@@ -293,3 +293,52 @@ def generate_distribution_group_lessons(ts_processed):
         dict_lesson_distribution[key_lesson] = pd.concat(dict_lesson_distribution[key_lesson], axis=0)
 
     return dict_lesson_distribution
+
+
+def get_summary_group_lessons_time_results(data_group_lessons_time_results):
+    return get_sum_array_dicts(data_group_lessons_time_results)
+
+
+def get_summary_group_lessons_activity_results(data_group_lessons_activity_results):
+    results = {}
+    keys_values = data_group_lessons_activity_results[0].keys()
+    for key_value in keys_values:
+        tmp_array_lesson = []
+        for value in data_group_lessons_activity_results:
+            tmp_array_lesson.append(value[key_value])
+        results[key_value] = get_sum_array_dicts(tmp_array_lesson)
+    return results
+
+
+def get_metric_group_lessons_activity(group_lessons_data_ts_processed, metrics):
+    data_metrics = []
+    for key_id in group_lessons_data_ts_processed.keys():
+        data_filter_id = group_lessons_data_ts_processed[key_id]
+        data_metrics.append(get_metric_all_lessons_activity_consolidate(data_filter_id, metrics))
+    return data_metrics
+
+
+def get_summary_group_lessons_activity_df_consolidate(group_lessons_data_ts_processed):
+    results = {}
+    for key_id in group_lessons_data_ts_processed.keys():
+        data_filter_id = group_lessons_data_ts_processed[key_id]
+        for key_lesson in data_filter_id.keys():
+            initial_state = True
+            if not key_lesson in results.keys():
+                results[key_lesson] = []
+                initial_state = False
+            data_filter_id_lesson = data_filter_id[key_lesson]
+            for activity in range(len(data_filter_id_lesson)):
+                if not initial_state:
+                    tmp = [data_filter_id_lesson[activity]]
+                    results[key_lesson].insert(activity, tmp)
+                else:
+                    results[key_lesson][activity].append(data_filter_id_lesson[activity])
+
+    for key_lesson in results.keys():
+        array = []
+        for value in results[key_lesson]:
+            array.append(pd.concat(value, axis=0))
+        results[key_lesson] = array
+
+    return results
