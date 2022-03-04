@@ -422,10 +422,7 @@ def generate_analysis_group_lessons_activity(root_path_data, ids_group, id_lesso
     metric_group_lessons_activity = graphics_processing.get_metric_group_lessons_activity(
         group_lessons_data_ts_processed, metrics)
 
-    metric_group_lessons_activity_consolidate = utils.concat_list_by_key(metric_group_lessons_activity)
-
-    consolidate_group_metrics_lessons_unified = graphics_processing.get_metric_group_lessons_activity_consolidate(
-        group_lessons_data_ts_processed, metrics)
+    consolidate_group_metrics_lessons_unified = utils.concat_list_by_key(metric_group_lessons_activity)
 
     summary_group_lessons_activity_df_consolidate = graphics_processing.\
         get_summary_group_lessons_activity_df_consolidate(group_lessons_data_ts_processed)
