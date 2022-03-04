@@ -416,8 +416,15 @@ def generate_analysis_group_lessons_activity(root_path_data, ids_group, id_lesso
     data_group_lessons_activity_results = processing_ts.get_data_group_lessons_activity_results(
         group_lessons_time_results, activity_info)
 
+    print(data_group_lessons_activity_results)
+
     summary_group_lessons_activity_results = graphics_processing.get_summary_group_lessons_activity_results(
         data_group_lessons_activity_results)
+
+    print(summary_group_lessons_activity_results)
+
+
+
 
     metric_group_lessons_activity = graphics_processing.get_metric_group_lessons_activity(
         group_lessons_data_ts_processed, metrics)
