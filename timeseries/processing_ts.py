@@ -68,8 +68,8 @@ def generate_results_time(time_activities, dataframe_results):
     dict_results_time = dict()
     for activity in time_activities:
         isolated_name_act = activity[1].strip()
-        seq_activity = str(activity[0])
-        name_activity = seq_activity + "-" + isolated_name_act
+        seq_activity = activity[0]
+        name_activity = str(seq_activity) + "-" + isolated_name_act
         diff_time = activity[-1]
         filter_df = dataframe_results.query("activity == @isolated_name_act & sequence == @seq_activity")
         if not filter_df.empty:
