@@ -21,21 +21,21 @@ def process_datetime_lessons(consolidate_dataframe_ts):
 def process_activities(dataframe_ts):
     data_values = dataframe_ts.values
     zone_data = []
-    previous_data = "-".join(data_values[0][10:])
+    previous_data = "-".join(data_values[0][9:])
     previous_datetime = data_values[0][2]
     i = 1
     while True:
-        if previous_data == "-".join(data_values[i][10:]):
+        if previous_data == "-".join(data_values[i][9:]):
             i += 1
         else:
             data_temp = [previous_data, previous_datetime, data_values[i][2]]
             zone_data.append(data_temp)
-            previous_data = "-".join(data_values[i][10:])
+            previous_data = "-".join(data_values[i][9:])
             previous_datetime = data_values[i][2]
             i += 1
 
         if i == len(data_values) - 1:
-            data_temp = ["-".join(data_values[i][10:]), previous_datetime, data_values[i][2]]
+            data_temp = ["-".join(data_values[i][9:]), previous_datetime, data_values[i][2]]
             zone_data.append(data_temp)
             break
     return zone_data
