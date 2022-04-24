@@ -41,7 +41,7 @@ def generate_data_result_activity(json_data):
 def generate_data_result_general(data_results_activities):
     dict_values = {}
     name_activity = data_results_activities[0][0]
-    x_values = ["Correct", "Incorrect", "Errors / Attempts"]
+    x_values = ["Correct", "Incorrect", "Failed Attempts"]
     y_values = data_results_activities[0][2:]
     dict_values['x_values'] = x_values
     dict_values['y_values'] = y_values
@@ -53,7 +53,7 @@ def generate_data_results_activity_bar_grouped(data_results_activities):
     dict_values = {}
     x_values = []
     y_values = []
-    name_values = ["Correct", "Incorrect", "Errors / Attempts"]
+    name_values = ["Correct", "Incorrect", "Failed Attempts"]
     for value in data_results_activities[1:]:
         x_values.append(value[0])
         y_values.append(value[2:])
@@ -85,7 +85,7 @@ def get_general_results_lessons(data_json_consolidate):
 def generate_data_results_general_lesson_pie(data_general_results_lessons):
     dict_values = {}
     y_values_tmp = []
-    x_values = ["Correct", "Incorrect", "Errors / Attempts"]
+    x_values = ["Correct", "Incorrect", "Failed Attempts"]
     for lesson in data_general_results_lessons:
         y_values_tmp.append(lesson[2:])
     dict_values['x_values'] = x_values
@@ -97,7 +97,7 @@ def generate_data_results_lessons_bar_grouped(data_results_lessons):
     dict_values = {}
     x_values = []
     y_values = []
-    name_values = ["Correct", "Incorrect", "Errors / Attempts"]
+    name_values = ["Correct", "Incorrect", "Failed Attempts"]
     for value in data_results_lessons:
         x_values.append(value[0])
         y_values.append(value[2:])
