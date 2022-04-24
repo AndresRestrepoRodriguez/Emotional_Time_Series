@@ -82,7 +82,7 @@ def generate_results_time(time_activities, dataframe_results):
                                                     'total_questions': total_questions,
                                                     'correct': correct,
                                                     'incorrect': incorrect,
-                                                    'errors': errors
+                                                    'failed_attempts': errors
                                                 }}
         else:
             dict_results_time[name_activity] = {'time': diff_time}
@@ -172,12 +172,12 @@ def filter_participant_lesson_results(dict_participant_results_time, activity_in
                 correct_acumulate += dict_participant_results_time[key_lesson][filter_key]['results']['correct']
                 incorrect_acumulate += dict_participant_results_time[key_lesson][filter_key]['results']['incorrect']
                 total_acumulate += dict_participant_results_time[key_lesson][filter_key]['results']['total_questions']
-                attemps_acumulate += dict_participant_results_time[key_lesson][filter_key]['results']['errors']
+                attemps_acumulate += dict_participant_results_time[key_lesson][filter_key]['results']['failed_attempts']
             tmp_dict_results = {
                 'total_questions': total_acumulate,
                 'correct': correct_acumulate,
                 'incorrect': incorrect_acumulate,
-                'errors': attemps_acumulate,
+                'failed_attempts': attemps_acumulate,
             }
             filter_dict_lesson[key_lesson] = tmp_dict_results
     return filter_dict_lesson
@@ -233,12 +233,12 @@ def filter_participant_lesson_subactivity_results(dict_participant_results_time,
                 correct_acumulate += dict_participant_results_time[key_lesson][filter]['results']['correct']
                 incorrect_acumulate += dict_participant_results_time[key_lesson][filter]['results']['incorrect']
                 total_acumulate += dict_participant_results_time[key_lesson][filter]['results']['total_questions']
-                attemps_acumulate += dict_participant_results_time[key_lesson][filter]['results']['errors']
+                attemps_acumulate += dict_participant_results_time[key_lesson][filter]['results']['failed_attempts']
             tmp_dict_results = {
                 'total_questions': total_acumulate,
                 'correct': correct_acumulate,
                 'incorrect': incorrect_acumulate,
-                'errors': attemps_acumulate,
+                'failed_attempts': attemps_acumulate,
             }
             filter_dict_lesson[key_lesson] = tmp_dict_results
     return filter_dict_lesson
