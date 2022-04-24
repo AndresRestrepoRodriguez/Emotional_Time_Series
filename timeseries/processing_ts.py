@@ -98,7 +98,7 @@ def get_most_long_time_series(dataframes_ts_lessons):
     return max(sizes_time_series, key=sizes_time_series.get)
 
 
-def get_participant_lessons_activity(participant_lessons_data_ts, activity='VL'):
+def get_participant_lessons_activity(participant_lessons_data_ts, activity):
     dict_lessons_activity = {}
     for key_lesson in participant_lessons_data_ts.keys():
         tmp_array_lesson = []
