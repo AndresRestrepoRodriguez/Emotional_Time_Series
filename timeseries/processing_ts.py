@@ -21,6 +21,7 @@ def process_datetime_lessons(consolidate_dataframe_ts):
 def process_activities(dataframe_ts):
     data_values = dataframe_ts.values
     zone_data = []
+    print(data_values[0][9:])
     previous_data = "-".join(data_values[0][9:])
     previous_datetime = data_values[0][2]
     i = 1
