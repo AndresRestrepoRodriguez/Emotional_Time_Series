@@ -14,7 +14,7 @@ def load_participant_lesson_dataframe(root_path, id_participant, id_lesson):
                                                 f"{ID_PREFIX}{UNDERSCORE_VALUE}{id_participant}",
                                                 f"{LESSON_PREFIX}{UNDERSCORE_VALUE}{id_lesson}",
                                                 DATA_METRICS_FILE_NAME)
-    metrics_dataframe = pd.read_csv(path_data_participant_lesson)
+    metrics_dataframe = pd.read_csv(path_data_participant_lesson, keep_default_na=False)
     return metrics_dataframe
 
 
