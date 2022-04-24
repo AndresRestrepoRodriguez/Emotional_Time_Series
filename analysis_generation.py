@@ -8,15 +8,15 @@ colors_metrics = {"engagement": "#BF2F21",
                   "relax": "#75602A",
                   "interest": "#2037C6",
                   "focus": "#319B1A"}
-dict_colores = {"VL-DNA": "#E8846E",
-                "TE-DNA": "#F1E58E",
-                "OP-ASSOC": "#8DD47A",
-                "OP-PRON": "#A09F90",
-                "OP-LIS": "#74BAEE",
-                "OP-JOIN": "#4083AF",
-                "OP-TRA": "#C574EE",
-                "OP-ORD": "#FD95DE",
-                "OP-DLG": "#FBA64C"}
+dict_colores = {"VL-NA": "#E8846E",
+                "TE-NA": "#F1E58E",
+                "OS-ASSOC": "#8DD47A",
+                "OS-PRON": "#A09F90",
+                "OS-LIS": "#74BAEE",
+                "OS-JOIN": "#4083AF",
+                "OS-TRA": "#C574EE",
+                "OS-ORD": "#FD95DE",
+                "OS-DLG": "#FBA64C"}
 
 colors_lessons = dict(lesson_1="#E8846E", lesson_2="#F1E58E", lesson_3="#8DD47A", lesson_4="#A09F90")
 

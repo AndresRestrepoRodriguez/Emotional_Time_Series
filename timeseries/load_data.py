@@ -5,7 +5,8 @@ import os
 ID_PREFIX = "id"
 LESSON_PREFIX = "lesson"
 UNDERSCORE_VALUE = "_"
-DATA_METRICS_FILE_NAME = "data_1secs_extra_exe.csv"
+DATA_METRICS_FILE_NAME = "emotional_data.csv"
+RESULTS_TIME_FILE_NAME = "results_time.json"
 
 
 def load_participant_lesson_dataframe(root_path, id_participant, id_lesson):
@@ -21,7 +22,7 @@ def load_participant_lesson_time_results(root_path, id_participant, id_lesson):
     path_json_participant_lesson = os.path.join(root_path,
                                                 f"{ID_PREFIX}{UNDERSCORE_VALUE}{id_participant}",
                                                 f"{LESSON_PREFIX}{UNDERSCORE_VALUE}{id_lesson}",
-                                                f"results_participant_{id_participant}_lesson_{id_lesson}.json")
+                                                RESULTS_TIME_FILE_NAME)
     json_data_file_participant_lesson = open(path_json_participant_lesson)
     json_data_participant_lesson = json.load(json_data_file_participant_lesson)
     return json_data_participant_lesson
@@ -75,8 +76,7 @@ def load_group_lessons_consolidate(root_path, id_participants, id_lessons):
         dict_group_lesson[user_str + id_participant] = {}
         for id_lesson in id_lessons:
             dict_group_lesson[user_str + id_participant][
-                lesson_str + id_lesson] = load_participant_lesson_dataframe(root_path, id_participant,
-                                                                                      id_lesson)
+                lesson_str + id_lesson] = load_participant_lesson_dataframe(root_path, id_participant, id_lesson)
     return dict_group_lesson
 
 
