@@ -115,8 +115,8 @@ def generate_analysis_participant_lessons(root_path_data, id_participant, ids_le
         metrics,
         complementary_title)
 
-    heatmaps_row = plotting_tool.generate_heatmap_row_lessons_overlay(processed_participant_lessons_data_ts, metrics,
-                                                                      complementary_title)
+    #heatmaps_row = plotting_tool.generate_heatmap_row_lessons_overlay(processed_participant_lessons_data_ts, metrics,
+                                                                      #complementary_title)
 
     time_row = plotting_tool.generate_row_time_participant_lessons(time_general_lessons, time_lessons_bar,
                                                                    complementary_title)
@@ -127,7 +127,7 @@ def generate_analysis_participant_lessons(root_path_data, id_participant, ids_le
                                                                          complementary_title)
 
     rows_graphics_array = [time_series_group_row, histograms_unified_row, histograms_overlayed_row,
-                           heatmaps_row, time_row, results_row]
+                           time_row, results_row]
 
     for row_graphic in rows_graphics_array:
         row_graphic.show()
@@ -180,8 +180,8 @@ def generate_analysis_participant_lessons_activity(root_path_data, id_participan
     histograms_overlayed_activity_row = plotting_tool.generate_row_histogram_metrics_lessons_activity_overlay(
         participant_activity_lessons_data_ts_processed_reset, colors_lessons, metrics, complementary_title)
 
-    heatmaps_activity_row = plotting_tool.generate_heatmap_row_lesson_activity_overlay(
-        participant_activity_lessons_data_ts_processed_reset, metrics, complementary_title)
+    '''heatmaps_activity_row = plotting_tool.generate_heatmap_row_lesson_activity_overlay(
+        participant_activity_lessons_data_ts_processed_reset, metrics, complementary_title)'''
 
     time_activity_row = plotting_tool.generate_row_time_participant_lessons_activity(time_lesson_activity,
                                                                                      time_lesson_activity_bar_pie,
@@ -196,7 +196,6 @@ def generate_analysis_participant_lessons_activity(root_path_data, id_participan
     rows_graphics_array = [time_series_group_activity_row,
                            histograms_unified_activity_row,
                            histograms_overlayed_activity_row,
-                           heatmaps_activity_row,
                            time_activity_row,
                            results_activity_row]
 
@@ -258,8 +257,8 @@ def generate_analysis_participant_lessons_subactivity(root_path_data, id_partici
     histograms_overlayed_subactivity_row = plotting_tool.generate_row_histogram_metrics_lessons_activity_overlay(
         participant_subactivity_lessons_data_ts_processed_reset, colors_lessons, metrics, complementary_title)
 
-    heatmaps_subactivity_row = plotting_tool.generate_heatmap_row_lesson_activity_overlay(
-        participant_subactivity_lessons_data_ts_processed_reset, metrics, complementary_title)
+    '''heatmaps_subactivity_row = plotting_tool.generate_heatmap_row_lesson_activity_overlay(
+        participant_subactivity_lessons_data_ts_processed_reset, metrics, complementary_title)'''
 
     time_subactivity_row = plotting_tool.generate_row_time_participant_lessons_activity(time_lesson_subactivity,
                                                                                         time_lesson_subactivity_bar_pie,
@@ -274,7 +273,6 @@ def generate_analysis_participant_lessons_subactivity(root_path_data, id_partici
     rows_graphics_array = [time_series_group_subactivity_row,
                            histograms_unified_subactivity_row,
                            histograms_overlayed_subactivity_row,
-                           heatmaps_subactivity_row,
                            time_subactivity_row,
                            results_subactivity_row]
 
